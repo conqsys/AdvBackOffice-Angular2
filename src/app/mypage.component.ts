@@ -13,6 +13,7 @@ import { SelectItem } from 'primeng/primeng';
 import { NumberComponent } from './label/number.component';
 import { TextBoxComponent } from './label/textbox.component';
 import { CheckboxComponent } from './label/checkbox.component';
+import { RadioComponent } from './label/radio.component';
 
 @Component({
   selector: 'mypage',
@@ -27,6 +28,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(NumberComponent) numberFields: QueryList<NumberComponent>;
   @ViewChildren(TextBoxComponent) textBoxes: QueryList<TextBoxComponent>;
   @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
+  @ViewChildren(RadioComponent) radioButtons: QueryList<RadioComponent>;
 
   title = 'AdvBack Office Development';
   app: AppController;
@@ -104,7 +106,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
       });
     }
 
-    this.App.NumberField4.setValue(2.6);
+    // this.App.NumberField4.setValue(2.6);
 
     if (this.textBoxes) {
       this.textBoxes.toArray().forEach(comp => {
@@ -127,6 +129,24 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
+    this.getDefaultRadioButtonsValue();
+  }
+
+
+  getDefaultRadioButtonsValue(): void {
+    if (this.radioButtons) {
+      let self = this;
+      this.radioButtons.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.id, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+      console.log(this.App.rbTimeCardAll);
+      this.App.rbTimeCardAll.setValue(true);
+    }
   }
 
   ngDoCheck() { }
@@ -138,6 +158,19 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   public setValue() {
     this.App.cmbStoreLocationFixed.setValue('IsItemReturnableFlag');
     this.App.dpPurchaseRepStartDate.setValue('12-01-2016');
+  }
+
+  getClockOutValue() {
+    // console.log('call radio button ' + this.App.rbTimeCardAll.getValue());
+    // function to call radio component to set value /
+    // this.App.rbTimeCardAll.setValue(false);
+
+    // function to show and hide radio button /
+    // this.App.rbTimeCardAll.show();
+    // this.App.rbTimeCardAll.hide();
+
+    // function for getRawValue /
+    // this.App.rbTimeCardAll.getRawValue();
   }
 
   public Show() {
@@ -211,15 +244,19 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
 
   getCheckBoxValue() {
     // alert(this.App.chkShowLocation3);
-    this.checkBoxValue1 = this.App.chkShowLocation1.getValue()
-    this.checkBoxValue2 = this.App.chkShowLocation2.getValue()
-    this.checkBoxValue3 = this.App.chkShowLocation3.getValue()
-    this.checkBoxValue4 = this.App.chkShowLocation4.getValue()
+    this.checkBoxValue1 = this.App.chkShowLocation1.getValue();
+    this.checkBoxValue2 = this.App.chkShowLocation2.getValue();
+    this.checkBoxValue3 = this.App.chkShowLocation3.getValue();
+    this.checkBoxValue4 = this.App.chkShowLocation4.getValue();
   }
 
   setCheckBoxValue() {
-    this.App.chkShowLocation1.setValue(1)
-    this.App.chkShowLocation1.setValue(1)
+    this.App.chkShowLocation1.setValue(true);
+    this.App.chkShowLocation1.setValue(true);
+  }
+
+  click() {
+    console.log('d');
   }
 
 }
