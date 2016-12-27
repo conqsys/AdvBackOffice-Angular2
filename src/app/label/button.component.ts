@@ -6,7 +6,7 @@ import { ListenersComponent } from './listeners';
 })
 export class ButtonComponent implements AfterViewInit, DoCheck {
 
-
+  
     @ContentChild(ListenersComponent) listeners: ListenersComponent;
 
     myParent: any;
