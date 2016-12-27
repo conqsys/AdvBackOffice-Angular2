@@ -190,6 +190,17 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
     alert('numberFieldClick');
   }
 
+  keyDownFunction() {
+    alert('keyDownFunction');
+  }
+
+  blurFunction() {
+    alert('blurFunction');
+  }
+  clickFunction() {
+    alert('clickFunction');
+  }
+
   setTextBoxValue() {
     this.App.TextField3.setValue('Hi Deepak!');
   }
