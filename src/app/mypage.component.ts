@@ -1,11 +1,13 @@
-import { AppComponent } from './';
+// import { AppComponent } from './';
+
 import {
-  DoCheck, AfterViewInit, OnInit, Component, ViewContainerRef, ElementRef, TemplateRef, EventEmitter, Injectable,
-  ViewChildren, ViewChild, QueryList
+  DoCheck, OnInit, Component, ElementRef, ViewChildren, QueryList, AfterViewInit
 } from '@angular/core';
 import { Store } from './label/store.component';
 import { AppController } from './label/app-controller';
 import { ComboBoxComponent } from './label/combobox.component';
+import { DateFieldComponent } from './label/date-field.component';
+import { LinkButtonComponent } from './label/linkButton.component';
 import { CommonService } from './label/common.service';
 import { SelectItem } from 'primeng/primeng';
 
@@ -15,9 +17,12 @@ import { SelectItem } from 'primeng/primeng';
 })
 
 export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
+
   @ViewChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
-  //cmbStoreLocation: ComboBoxComponent;
-  title = 'app works!';
+  @ViewChildren(DateFieldComponent) dateFields: QueryList<DateFieldComponent>;
+  @ViewChildren(LinkButtonComponent) linkButtons: QueryList<LinkButtonComponent>;
+
+  title = 'AdvBack Office Development';
   app: AppController;
   stores = Store[0];
   check: number = 1;
@@ -25,10 +30,11 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   cities: SelectItem[];
   selectedCity: any;
   App: any = this;
+
   constructor(private element: ElementRef,
     private commonService: CommonService) {
-
   }
+
   ngOnInit() {
     console.log(this.element.nativeElement);
     this.cities = [];
@@ -38,14 +44,24 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
     this.cities.push({ label: 'London', value: { id: 3, name: 'London', code: 'LDN' } });
     this.cities.push({ label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } });
     this.cities.push({ label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } });
-    //  this.app = new AppController(this.element.nativeElement, this)
   }
+
   ngAfterViewInit() {
-        if (this.comboBoxes && this.check == 1) {
-      //this.cmbStoreLocation = this.comboBoxes.toArray().filter(i => i.props.ID.value == 'cmbStoreLocation')[0];
-      this.stores = Store.getAllStores(this.element.nativeElement, this.myParent, this.commonService);
-      let self = this;
-      this.check = 0;
+    let self = this;
+    if (this.dateFields) {
+      this.dateFields.toArray().forEach(comp => {
+        console.log('date is' + comp.props.ID.value);
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+        console.log('datda is' + this.App.dpPurchaseRepStartDate);
+      });
+    }
+
+    if (this.comboBoxes) {
       this.comboBoxes.toArray().forEach(comp => {
         Object.defineProperty(self, comp.props.ID.value, {
           writable: true,
@@ -54,58 +70,67 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
           value: comp
         });
       });
+    }
 
-
-      alert(this.App.cmbStoreLocation);
-
-      this.stores.forEach(store => {
-        Object.defineProperty(self, store.key, {
+    if (this.linkButtons) {
+      this.linkButtons.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
           writable: true,
           enumerable: true,
           configurable: true,
-          value: store
+          value: comp
         });
-
-      })
-
-      this.stores.forEach(store => {
-        store.callService();
-      })
-      //this.App.dsStoreLocation
+      });
     }
+  }
 
+  ngDoCheck() { }
 
-    if (this.comboBoxes) {
-      this.stores.forEach(store => {
-        const combo = this.comboBoxes.toArray().filter(i => i.props.StoreID && i.props.StoreID.value == store.key)[0];
-        if (combo) {
-          combo.store = store;
-        }
-      })
+  doSomeThing() { }
+
+  public getValue() {
+
+  }
+
+  public setValue() {
+    this.App.cmbStoreLocationFixed.setValue('IsItemReturnableFlag');
+    this.App.dpPurchaseRepStartDate.setValue('12-01-2016');
+  }
+
+  public Show() {
+    let enableProperty = this.App.cmbStoreLocationFixed.enableCombo;
+    if (enableProperty) {
+      this.App.cmbStoreLocationFixed.enableCombo = false;
+    } else {
+      this.App.cmbStoreLocationFixed.enableCombo = true;
     }
-
   }
 
-  setStoreData(storeID:String){
-    const store= this.comboBoxes.toArray().filter(i => i.props.StoreID && i.props.StoreID.value == store.key)[0];
-    const combo = this.comboBoxes.toArray().filter(i => i.props.StoreID && i.props.StoreID.value == store.key)[0];
-        if (combo) {
-          combo.store = store;
-        }
-  }
+  public comboApiCall() {
+    let url = this.App.cmbmoveDepartment.element.nativeElement
+      .querySelectorAll('DirectEvents')[0]
+      .querySelectorAll('Select')[0]
+      .attributes[0].nodeValue;
 
-  ngDoCheck() {
+    // url call API
 
-
-
-  }
-
-  doSomeThing() {
-    this.App.dsDepartmentTypes.data.items[0].data.DepartmentID
+    this.commonService
+      .getDataFromURL(url)
+      .then(result => {
+        alert('redirect path is done');
+      });
   }
 
   updateBulkStoreItem() {
     alert('wow');
+  }
+
+  showEmployeeSetupWindow() {
+    console.log('testing link button');
+  }
+
+  private applyCompaniesSearchFilter() {
+    alert('Hi');
   }
 
   getMeParamValue() {

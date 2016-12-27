@@ -1,5 +1,8 @@
-import { QueryList, Injectable, DoCheck,ContentChild, ContentChildren, Directive, Component, ElementRef, AfterViewInit } from '@angular/core';
-import { ExtBaseComponent } from './extbase'
+import {
+  QueryList, Injectable, DoCheck, ContentChild,
+  ContentChildren, Directive, ElementRef, AfterViewInit
+} from '@angular/core';
+import { ExtBaseComponent } from './extbase';
 
 @Injectable()
 export class ExtEvent extends ExtBaseComponent {
