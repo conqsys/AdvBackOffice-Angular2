@@ -277,17 +277,17 @@
 <br>
 <ext:TextField runat="server" ID="TextField1" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <KeyDown Fn="applyCompaniesSearchFilter" />
+    <KeyDown Fn="keyDownFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField2" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Blur Fn="applyCompaniesSearchFilter" />
+    <Blur Fn="blurFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField3" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Click Fn="applyCompaniesSearchFilter" />
+    <Click Fn="clickFunction" />
   </Listeners>
 </ext:TextField>
 
