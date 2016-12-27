@@ -250,21 +250,21 @@
 <ext:NumberField ID="NumberField1" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Blur Fn="numberFieldBlur" />
+    <Blur Fn="numberFieldFunction" />
   </Listeners>
 </ext:NumberField>
 2
 <ext:NumberField ID="NumberField2" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Click Fn="numberFieldClick" />
+    <Click Fn="numberFieldFunction" />
   </Listeners>
 </ext:NumberField>
 3
 <ext:NumberField ID="NumberField3" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Show Fn="numberFieldShow" />
+    <Show Fn="numberFieldFunction" />
   </Listeners>
 </ext:NumberField>
 4
@@ -277,17 +277,17 @@
 <br>
 <ext:TextField runat="server" ID="TextField1" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <KeyDown Fn="keyDownFunction" />
+    <KeyDown Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField2" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Blur Fn="blurFunction" />
+    <Blur Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField3" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Click Fn="clickFunction" />
+    <Click Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 
@@ -302,41 +302,37 @@
 <br>
 <ext:Checkbox runat="server" ID="chkShowLocation1" IDMode="Static" Width="20" FieldLabel="A">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation2" IDMode="Static" Width="20" FieldLabel="B">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation3" IDMode="Static" Width="20" FieldLabel="C">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation4" IDMode="Static" Width="20" FieldLabel="D">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
-<ext:MultiCombo LabelSeparator=" " Width="250" ID="cmpInvoiceStatusStore" runat="server" FieldLabel="Store Location" Name="StoreLocationID"
-  QueryMode="Local" TypeAhead="true" ValueField="StoreLocationID" DisplayField="StoreName" StoreID="dsStoreLocationsForAll"
-  IDMode="Static">
-</ext:MultiCombo>
 <br> checkbox1:{{checkBoxValue1}}
 <br> checkBox2:{{checkBoxValue2}}
 <br> checkBox3:{{checkBoxValue3}}
 <br> checkBox4:{{checkBoxValue4}}
 <br>
 
-<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
+<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue">getCheckBoxValue</button>
 <br><br>
-<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue"></button>
+<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue">setCheckBoxValue</button>
 <br><br>
 
 <button pButton type="button" (click)="setValue()" label="set Values"></button>

@@ -3,8 +3,8 @@ import { ListenersComponent } from './listeners';
 
 @Component({
   selector: 'ext:TextField',
-  template: `<ng-content></ng-content> <input pInputText type="text" [ngModel]="textBoxContent" 
-    placeholder="Type your name" (ngModelChange)="valuechange($event)"/>`,
+  template: `<ng-content></ng-content> <input pInputText type="text" [(ngModel)]="textBoxContent" 
+    (blur)="blurEventHandler()" placeholder="Type your name"> `,
 })
 
 export class TextBoxComponent implements AfterViewInit, DoCheck {
@@ -42,7 +42,6 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
     this.textBoxContent = newValue;
   }
 
-
   blurEventHandler(element) {
     let elements: any;
     if (this.listenerElement.querySelector('Blur')) {
@@ -64,6 +63,6 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
   }
 
   ngDoCheck() {
-    console.log(this.listeners);
+    // console.log(this.listeners);
   }
 }

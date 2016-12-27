@@ -53,7 +53,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log(this.element.nativeElement);
+    // console.log(this.element.nativeElement);
     this.cities = [];
     this.cities.push({ label: 'Select City', value: null });
     this.cities.push({ label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } });
@@ -194,35 +194,28 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
     return 'xyz';
   }
 
-  numberFieldShow() {
-    alert('numberFieldShow');
-  }
-  numberFieldBlur() {
-    alert('numberFieldBlur');
-  }
-  numberFieldClick() {
-    alert('numberFieldClick');
-  }
 
-  keyDownFunction() {
+ //Number Field Functions
+  numberFieldFunction() {
+    console.log('numberField');
+  }
+  
+  textBoxFunction() {
     alert('keyDownFunction');
   }
 
-  blurFunction() {
-    alert('blurFunction');
-  }
-  clickFunction() {
-    alert('clickFunction');
-  }
+ 
+  //Set,Get textbox
 
   setTextBoxValue() {
     this.App.TextField3.setValue('Hi Deepak!');
   }
 
   getTextBoxValue() {
-    this.txtData = this.App.TextField3.getValue();
+    this.txtData = this.App.TextField1.getValue();
   }
 
+ //Set,Get Checkbox
   getCheckBoxValue() {
     // alert(this.App.chkShowLocation3);
     this.checkBoxValue1 = this.App.chkShowLocation1.getValue()
@@ -232,8 +225,11 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   }
 
   setCheckBoxValue() {
-    this.App.chkShowLocation1.setValue(1)
-    this.App.chkShowLocation1.setValue(1)
+    this.App.chkShowLocation1.setValue(true);    
+  }
+
+  checkBoxClick(){
+    console.log('ff')
   }
 
 }
