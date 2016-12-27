@@ -19,7 +19,7 @@ export class LinkButtonComponent implements AfterViewInit, DoCheck {
   customTarget: any;
   btnEmployeeSetupPopWindowUrl: string;
   getValue: string;
-
+  getData: any;
   constructor(private element: ElementRef,
     private cd: ChangeDetectorRef,
     private vcRef: ViewContainerRef,
@@ -45,12 +45,10 @@ export class LinkButtonComponent implements AfterViewInit, DoCheck {
           .querySelector('directEvents')
           .querySelector('click').attributes.Url.value;
 
-        this.commonService
+        this.getData = this.commonService
           .getDataFromURL(this.btnEmployeeSetupPopWindowUrl)
-          .then(result => {
-            alert('redirect path is done');
-          })
-
+        // .then(result => 
+        alert(this.getData);
       }
     } else {
       console.log('no click handler for' + this.props.Text.value);
@@ -70,7 +68,6 @@ export class LinkButtonComponent implements AfterViewInit, DoCheck {
 
   ngAfterViewInit() {
     this.directEvents = this.element.nativeElement.querySelector('DirectEvents');
-
     if (this.directEvents) {
       this.click = this.directEvents.querySelector('click');
       if (this.click) {

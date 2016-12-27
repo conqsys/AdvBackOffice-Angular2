@@ -8,6 +8,7 @@ import { AppController } from './label/app-controller';
 import { ComboBoxComponent } from './label/combobox.component';
 import { DateFieldComponent } from './label/date-field.component';
 import { LinkButtonComponent } from './label/linkButton.component';
+import { LabelComponent } from './label/label.component';
 import { CommonService } from './label/common.service';
 import { SelectItem } from 'primeng/primeng';
 
@@ -21,6 +22,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
   @ViewChildren(DateFieldComponent) dateFields: QueryList<DateFieldComponent>;
   @ViewChildren(LinkButtonComponent) linkButtons: QueryList<LinkButtonComponent>;
+  @ViewChildren(LabelComponent) labels: QueryList<LabelComponent>;
 
   title = 'AdvBack Office Development';
   app: AppController;
@@ -30,6 +32,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   cities: SelectItem[];
   selectedCity: any;
   App: any = this;
+  getData: any;
 
   constructor(private element: ElementRef,
     private commonService: CommonService) {
@@ -71,7 +74,17 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
-
+    if (this.labels) {
+      this.labels.toArray().forEach(comp =>{
+        Object.defineProperty(self,comp.props.ID.value,{
+          writable: true,
+          enumerable: true,
+          configurable:true,
+          value: comp
+        });
+      });
+       
+    }
     if (this.linkButtons) {
       this.linkButtons.toArray().forEach(comp => {
         Object.defineProperty(self, comp.props.ID.value, {
@@ -114,11 +127,9 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
 
     // url call API
 
-    this.commonService
-      .getDataFromURL(url)
-      .then(result => {
-        alert('redirect path is done');
-      });
+
+
+
   }
 
   updateBulkStoreItem() {

@@ -1,7 +1,12 @@
 <h1>
   {{title}}
 </h1>
-<ext:Label></ext:Label>
+<ext:Label ID="label1">
+  <ToolTips>
+    <ext:ToolTip ID="ToolTip1" runat="server" Title="Add" Html="Label ToolTip Testing" />
+  </ToolTips>
+</ext:Label>
+
 <br>
 <br>
 <!--<p-dropdown [options]="cities"  [(ngModel)]="selectedCity" [filter]="true" name="selectedCity"  ></p-dropdown>-->

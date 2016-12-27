@@ -26,14 +26,16 @@ import { MyPageComponent } from './mypage.component';
 import { ButtonComponent } from './label/button.component';
 import { ListenersComponent, ExtEvent, ClickEvent, ExtraParams, StoreParameter } from './label/listeners';
 import { ExtBaseComponent } from './label/extbase';
-import { DropdownModule } from 'primeng/primeng';
-import { CalendarModule } from 'primeng/primeng';
+import { DropdownModule, TooltipModule, CalendarModule} from 'primeng/primeng';
+
+
 /* sky-app components end */
 
 @NgModule({
   imports: [
     BrowserModule,
     CalendarModule,
+    TooltipModule,
     DropdownModule,
     FormsModule,
     HttpModule,
