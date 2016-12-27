@@ -41,8 +41,11 @@ import {
   ButtonModule,
   InputTextModule,
   MenubarModule,
-  RadioButtonModule
+  RadioButtonModule,
+  TooltipModule
+
 } from 'primeng/primeng';
+
 /* sky-app components end */
 
 @NgModule({
@@ -53,6 +56,7 @@ import {
     ButtonModule,
     InputTextModule,
     CalendarModule,
+    TooltipModule,
     DropdownModule,
     FormsModule,
     HttpModule,

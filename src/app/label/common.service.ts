@@ -11,8 +11,8 @@ export class CommonService {
 
   private apiServiceBase: string = 'http://192.168.1.207:8081';
 
-  public getDataFromURL = function (url) {
-    let value: any;
+  public getDataFromURL = function (url : any) {
+    
     console.log('hiiiii test APi');
     // return this.http
     //   .get(this.apiServiceBase + url)
@@ -20,7 +20,7 @@ export class CommonService {
     //   (res: Response) =>
     //     res.json()
     //   );
-    return value;
+    return 's';
   };
 
 }
