@@ -17,6 +17,9 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 import { AppComponent } from './app.component';
 import { LabelComponent } from './label/label.component';
+import { FieldContainerComponent } from './label/field-container.component';
+import { TextBoxComponent } from './label/textbox.component';
+import { FieldSetComponent } from './label/field-set.component';
 import { ComboBoxComponent } from './label/combobox.component';
 import { DateFieldComponent } from './label/date-field.component';
 import { LinkButtonComponent } from './label/linkButton.component';
@@ -28,11 +31,13 @@ import { ListenersComponent, ExtEvent, ClickEvent, ExtraParams, StoreParameter }
 import { ExtBaseComponent } from './label/extbase';
 import { DropdownModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
 /* sky-app components end */
 
 @NgModule({
   imports: [
     BrowserModule,
+    ButtonModule,
     CalendarModule,
     DropdownModule,
     FormsModule,
@@ -46,6 +51,9 @@ import { CalendarModule } from 'primeng/primeng';
   declarations: [
     AppComponent,
     LinkButtonComponent,
+    FieldContainerComponent,
+    TextBoxComponent,
+    FieldSetComponent,
     DateFieldComponent,
     LabelComponent,
     ComboBoxComponent,

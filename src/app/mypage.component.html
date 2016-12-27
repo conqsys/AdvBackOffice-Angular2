@@ -6,7 +6,7 @@
 <br>
 <!--<p-dropdown [options]="cities"  [(ngModel)]="selectedCity" [filter]="true" name="selectedCity"  ></p-dropdown>-->
 
-<!--<ext:Store ID="dsDepartmentTypes" runat="server" RemoteSort="true" AutoLoad="false" UseIdConfirmation="true">
+<ext:Store ID="dsDepartmentTypes" runat="server" RemoteSort="true" AutoLoad="false" UseIdConfirmation="true">
   <Proxy>
     <ext:AjaxProxy Url="/DepartmentTypeData/GetDepartmentTypes" NoCache="false">
       <Reader>
@@ -29,17 +29,17 @@
   </Model>
 
   <Listeners>
-    <!--<Load Handler="App.dsDisPromptMethods.reload();" />
+    <!--<Load Handler="App.dsDisPromptMethods.reload();" /> -->
   </Listeners>
-</ext:Store>-->
+</ext:Store>
 
-<!--<ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocation" Width="100" TypeAhead="true" QueryMode="Local" StoreID="dsDepartmentTypes"
+<ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocation" Width="100" TypeAhead="true" QueryMode="Local" StoreID="dsDepartmentTypes"
   LabelSeparator=" " IDMode="Static" DisplayField="StoreName" Hidden="true" ValueField="StoreLocationID">
   <Listeners>
     <Select Handler="App.dsStoreLocTaxes.reload();App.dsSalesRestrictions.reload();App.cmbSalesRestrication.setValue(0);App.cmbSalesRestrication.setRawValue('NONE');App.cmbTax.setRawValue('NONE');App.cmbTax.setValue(0)"
     />
   </Listeners>
-</ext:ComboBox>-->
+</ext:ComboBox>
 
 <ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocationFixed" Width="100" TypeAhead="true" QueryMode="Local"
   LabelSeparator=" " IDMode="Static" Hidden="true">
@@ -81,13 +81,13 @@
 </ext:ComboBox>-->
 
 
-<!--<ext:FieldSet LabelSeparator=" " ColumnWidth=".40" ID="rightDepPanel5" runat="server" Border="false" IDMode="Static">
+<ext:FieldSet LabelSeparator=" " ColumnWidth=".40" ID="rightDepPanel5" runat="server" Border="false" IDMode="Static">
   <Defaults>
     <ext:Parameter Name="LabelWidth" Value="170" />
     <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
   </Defaults>
   <Items>
-    <ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocationFixed" Width="100" TypeAhead="true" QueryMode="Local"
+    <ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocationFixeds" Width="100" TypeAhead="true" QueryMode="Local"
       LabelSeparator=" " IDMode="Static" Hidden="true">
       <Listeners>
       </Listeners>
@@ -111,17 +111,16 @@
         <ext:ListItem Value="ProfitPercent" Text="Profit Percent" />
       </Items>
     </ext:ComboBox>
-    <ext:TextField ID="txtDepDesc" runat="server" FieldLabel="Description" AllowBlank="false" IDMode="Static" Name="DepartmentDescription"></ext:TextField>
     <ext:TextField ID="txtMinSaleAmount" runat="server" FieldLabel="Minimum Open Sale Amount" IDMode="Static" Name="MinimumOpenSaleAmount">
       <Listeners>
         <Blur Fn="setDollorSignFoSaleAmt"></Blur>
       </Listeners>
     </ext:TextField>
   </Items>
-</ext:FieldSet>-->
+</ext:FieldSet>
 
-<!--<br>
-<br>-->
+<br>
+<br>
 
 <ext:TextField runat="server" ID="txtCompanysearchDetails" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
@@ -161,9 +160,29 @@
 <br>
 <br>
 
-<button (click)="setValue()"> set </button>
-<button (click)="Show()"> Show/Hide </button>
+<ext:FieldContainer ID="Panel3" runat="server" Layout="ColumnLayout" Width="500" Border="false" Header="false">
+  <Items>
+    <ext:ComboBox runat="server" ID="cmbDepartmentFlag" Hidden="true" Width="100" DataIndex="Value" IDMode="Static">
+      <Items>
+        <ext:ListItem Value="False" Text="False" />
+        <ext:ListItem Value="True" Text="True" />
+      </Items>
+      <SelectedItems>
+        <ext:ListItem Value="False" Text="False" />
+      </SelectedItems>
+    </ext:ComboBox>
+    <ext:Label ID="lblSPAC" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;" Hidden="false" IDMode="Static"></ext:Label>
+    <ext:TextField runat="server" ID="txtCompanysearchDetails" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
+      <Listeners>
+        <KeyDown Fn="applyCompaniesSearchFilter" />
+      </Listeners>
+    </ext:TextField>
+  </Items>
+</ext:FieldContainer>
+<br><br>
 
-<br>
-
-<button (click)="comboApiCall()"> Call API </button>
+<button pButton type="button" (click)="setValue()" label="set Values"></button>
+<br><br>
+<button pButton type="button" (click)="Show()" label="Show/Hide"></button>
+<br><br>
+<button pButton type="button" (click)="comboApiCall()" label="Call API"></button>
