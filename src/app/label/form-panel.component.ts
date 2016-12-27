@@ -7,10 +7,10 @@ export class ListItem {
 }
 
 @Component({
-  selector: 'ext:Panel',
+  selector: 'ext:FormPanel',
 
   template: `
-    <h3>Panel</h3>
+    <h3>FormPanel</h3>
     <ng-content></ng-content>
     <div>
       
@@ -18,7 +18,7 @@ export class ListItem {
 })
 
 
-export class PanelComponent implements OnInit {
+export class FormPanelComponent implements OnInit {
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
   }

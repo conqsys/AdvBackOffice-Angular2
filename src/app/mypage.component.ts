@@ -11,6 +11,9 @@ import { LinkButtonComponent } from './label/linkButton.component';
 import { LabelComponent } from './label/label.component';
 import { CommonService } from './label/common.service';
 import { SelectItem } from 'primeng/primeng';
+import { NumberComponent } from './label/number.component';
+import { TextBoxComponent } from './label/textbox.component';
+import { CheckboxComponent } from './label/checkbox.component';
 
 @Component({
   selector: 'mypage',
@@ -23,6 +26,9 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(DateFieldComponent) dateFields: QueryList<DateFieldComponent>;
   @ViewChildren(LinkButtonComponent) linkButtons: QueryList<LinkButtonComponent>;
   @ViewChildren(LabelComponent) labels: QueryList<LabelComponent>;
+  @ViewChildren(NumberComponent) numberFields: QueryList<NumberComponent>;
+  @ViewChildren(TextBoxComponent) textBoxes: QueryList<TextBoxComponent>;
+  @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
 
   title = 'AdvBack Office Development';
   app: AppController;
@@ -32,7 +38,15 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   cities: SelectItem[];
   selectedCity: any;
   App: any = this;
+
   getData: any;
+
+  private checkBoxValue1: boolean;
+  private checkBoxValue2: boolean;
+  private checkBoxValue3: boolean;
+  private checkBoxValue4: boolean;
+  private txtData: string = '';
+
 
   constructor(private element: ElementRef,
     private commonService: CommonService) {
@@ -95,15 +109,47 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
+    if (this.numberFields) {
+      this.numberFields.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+    }
+
+    this.App.NumberField4.setValue(2.6);
+
+    if (this.textBoxes) {
+      this.textBoxes.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+    }
+
+    if (this.checkBoxes) {
+      this.checkBoxes.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+    }
   }
 
   ngDoCheck() { }
 
   doSomeThing() { }
 
-  public getValue() {
-
-  }
+  public getValue() { }
 
   public setValue() {
     this.App.cmbStoreLocationFixed.setValue('IsItemReturnableFlag');
@@ -147,4 +193,36 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   getMeParamValue() {
     return 'xyz';
   }
+
+  numberFieldShow() {
+    alert('numberFieldShow');
+  }
+  numberFieldBlur() {
+    alert('numberFieldBlur');
+  }
+  numberFieldClick() {
+    alert('numberFieldClick');
+  }
+
+  setTextBoxValue() {
+    this.App.TextField3.setValue('Hi Deepak!');
+  }
+
+  getTextBoxValue() {
+    this.txtData = this.App.TextField3.getValue();
+  }
+
+  getCheckBoxValue() {
+    // alert(this.App.chkShowLocation3);
+    this.checkBoxValue1 = this.App.chkShowLocation1.getValue()
+    this.checkBoxValue2 = this.App.chkShowLocation2.getValue()
+    this.checkBoxValue3 = this.App.chkShowLocation3.getValue()
+    this.checkBoxValue4 = this.App.chkShowLocation4.getValue()
+  }
+
+  setCheckBoxValue() {
+    this.App.chkShowLocation1.setValue(1)
+    this.App.chkShowLocation1.setValue(1)
+  }
+
 }

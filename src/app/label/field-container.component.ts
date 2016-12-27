@@ -7,18 +7,18 @@ export class ListItem {
 }
 
 @Component({
-  selector: 'ext:Panel',
+  selector: 'ext:FieldContainer',
 
   template: `
-    <h3>Panel</h3>
+    <h3>FieldContainer</h3>
     <ng-content></ng-content>
-    <div>
+      <div>
       
     </div>`
 })
 
 
-export class PanelComponent implements OnInit {
+export class FieldContainerComponent implements OnInit {
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
   }
