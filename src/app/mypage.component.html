@@ -222,7 +222,7 @@
                 <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
               </Defaults>
               <Items>
-                <ext:Checkbox ID="chkIsBlueLaw2Enabled" runat="server" FieldLabel="BlueLaw2 Enable" IDMode="Static" Name="IsBlueLaw2Enabled"></ext:Checkbox>
+                <!--<ext:Checkbox ID="chkIsBlueLaw2Enabled" runat="server" FieldLabel="BlueLaw2 Enable" IDMode="Static" Name="IsBlueLaw2Enabled"></ext:Checkbox>-->
               </Items>
             </ext:FieldSet>
           </Items>
@@ -328,7 +328,14 @@
 <br> checkBox2:{{checkBoxValue2}}
 <br> checkBox3:{{checkBoxValue3}}
 <br> checkBox4:{{checkBoxValue4}}
-<br>
+<br> .................................radioButton..................................
+<ext:Radio LabelWidth="40" Name="radio" ID="rbTimeCardAll" LabelSeparator=" " IDMode="Static" Checked="true" FieldLabel="All"
+  runat="server">
+  <Listeners>
+    <Change Fn="getClockOutValue" />
+  </Listeners>
+</ext:Radio>
+
 
 <button pButton type="button" (click)="getCheckBoxValue()" label="GetValue">getCheckBoxValue</button>
 <br><br>

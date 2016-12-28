@@ -27,6 +27,7 @@ import { PanelComponent } from './label/panel.component';
 import { ComboBoxComponent } from './label/combobox.component';
 import { DateFieldComponent } from './label/date-field.component';
 import { LinkButtonComponent } from './label/linkButton.component';
+import { RadioComponent } from './label/radio.component';
 import { CommonService } from './label/common.service';
 import { Store } from './label/store.component';
 import { MyPageComponent } from './mypage.component';
@@ -40,7 +41,9 @@ import {
   ButtonModule,
   InputTextModule,
   MenubarModule,
+  RadioButtonModule,
   TooltipModule
+
 } from 'primeng/primeng';
 
 /* sky-app components end */
@@ -48,6 +51,7 @@ import {
 @NgModule({
   imports: [
     MenubarModule,
+    RadioButtonModule,
     BrowserModule,
     ButtonModule,
     InputTextModule,
@@ -69,6 +73,7 @@ import {
     CheckboxComponent,
     PanelComponent,
     ToolbarComponent,
+    RadioComponent,
     FieldContainerComponent,
     FormPanelComponent,
     TextBoxComponent,
