@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { LabelComponent } from './label/label.component';
 import { ToolbarComponent } from './label/toolbar.component';
 import { CheckboxComponent } from './label/checkbox.component';
+import { FileUploadFieldComponent } from './label/file-upload-field.component';
 import { NumberComponent } from './label/number.component';
 import { FieldContainerComponent } from './label/field-container.component';
 import { TextBoxComponent } from './label/textbox.component';
@@ -42,8 +43,8 @@ import {
   InputTextModule,
   MenubarModule,
   RadioButtonModule,
-  TooltipModule
-
+  TooltipModule,
+  FileUploadModule
 } from 'primeng/primeng';
 
 /* sky-app components end */
@@ -51,6 +52,7 @@ import {
 @NgModule({
   imports: [
     MenubarModule,
+    FileUploadModule,
     RadioButtonModule,
     BrowserModule,
     ButtonModule,
@@ -68,6 +70,7 @@ import {
   ],
   declarations: [
     AppComponent,
+    FileUploadFieldComponent,
     LinkButtonComponent,
     NumberComponent,
     CheckboxComponent,

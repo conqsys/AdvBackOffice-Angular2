@@ -9,10 +9,10 @@ export class CommonService {
 
   }
 
-  private apiServiceBase: string = 'http://192.168.1.207:8081';
+  private apiServiceBase: string = 'http://192.168.1.183:8081/';
 
-  public getDataFromURL = function (url : any) {
-    
+  public getDataFromURL (url: any) {
+
     console.log('hiiiii test APi');
     // return this.http
     //   .get(this.apiServiceBase + url)
@@ -22,5 +22,15 @@ export class CommonService {
     //   );
     return 's';
   };
+
+
+  public upload() {
+    return this.http
+      .get(this.apiServiceBase + 'upload')
+      .map(
+      (res: Response) =>
+        res.json()
+      );
+  }
 
 }
