@@ -5,9 +5,12 @@ import {
 import { ListenersComponent } from './listeners';
 
 @Component({
+
   selector: 'ext:NumberField',
   template: `<ng-content></ng-content> 
-    <input type="number"  [(ngModel)]="value" (blur)="onClickHandler($event)"  >`,
+    <input type="number"  [(ngModel)]="value" (click)="onClickHandler($event)"  >`,
+
+
 })
 
 export class NumberComponent implements AfterViewInit, DoCheck, OnChanges, OnInit {
@@ -23,7 +26,6 @@ export class NumberComponent implements AfterViewInit, DoCheck, OnChanges, OnIni
     private vcRef: ViewContainerRef) {
     this.myParent = (<any>this.vcRef.injector)._view.context;
   }
-
 
   ngAfterViewInit() {
 
@@ -59,10 +61,6 @@ export class NumberComponent implements AfterViewInit, DoCheck, OnChanges, OnIni
   }
 
   onClickHandler(element: any) {
-    //   var number=Math.round(this.textBoxValue);
-    //   if(number>this.textBoxValue){
-
-    //   }
     this.textBoxValue = Math.round(this.textBoxValue * 100) / 100;
     let elements: any;
     if (this.listenerElement.querySelector('Blur')) {

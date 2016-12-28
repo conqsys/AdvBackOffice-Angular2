@@ -250,21 +250,21 @@
 <ext:NumberField ID="NumberField1" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Blur Fn="numberFieldBlur" />
+    <Blur Fn="numberFieldFunction1" />
   </Listeners>
 </ext:NumberField>
 2
 <ext:NumberField ID="NumberField2" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Click Fn="numberFieldClick" />
+    <Click Fn="numberFieldFunction2" />
   </Listeners>
 </ext:NumberField>
 3
 <ext:NumberField ID="NumberField3" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Show Fn="numberFieldShow" />
+    <Show Fn="numberFieldFunction3" />
   </Listeners>
 </ext:NumberField>
 4
@@ -277,17 +277,17 @@
 <br>
 <ext:TextField runat="server" ID="TextField1" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <KeyDown Fn="keyDownFunction" />
+    <KeyDown Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField2" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Blur Fn="blurFunction" />
+    <Blur Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField3" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Click Fn="clickFunction" />
+    <Click Fn="textBoxFunction" />
   </Listeners>
 </ext:TextField>
 
@@ -295,32 +295,30 @@
 <button (click)="setTextBoxValue()"> Set </button>
 <button (click)="getTextBoxValue()"> Get </button>
 
-
-
 <br>
 <br> ................................................CheckBox...................................................
 <br>
 <ext:Checkbox runat="server" ID="chkShowLocation1" IDMode="Static" Width="20" FieldLabel="A">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation2" IDMode="Static" Width="20" FieldLabel="B">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation3" IDMode="Static" Width="20" FieldLabel="C">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation4" IDMode="Static" Width="20" FieldLabel="D">
   <Listeners>
-    <Change Fn="click" />
+    <Change Fn="checkBoxClick" />
   </Listeners>
 </ext:Checkbox>
 
@@ -328,18 +326,15 @@
 <br> checkBox2:{{checkBoxValue2}}
 <br> checkBox3:{{checkBoxValue3}}
 <br> checkBox4:{{checkBoxValue4}}
-<br> .................................radioButton..................................
-<ext:Radio LabelWidth="40" Name="radio" ID="rbTimeCardAll" LabelSeparator=" " IDMode="Static" Checked="true" FieldLabel="All"
-  runat="server">
-  <Listeners>
-    <Change Fn="getClockOutValue" />
-  </Listeners>
-</ext:Radio>
 
 
-<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
 <br><br>
-<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue"></button>
+<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue">getCheckBoxValue</button>
+<br><br>
+<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
+
+<br><br>
+<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue">setCheckBoxValue</button>
 <br><br>
 
 <button pButton type="button" (click)="setValue()" label="set Values"></button>
@@ -349,11 +344,17 @@
 <button pButton type="button" (click)="comboApiCall()" label="Call API"></button>
 
 
-<br>
-<br> ................................................tooltip on Button ...................................................
-<br>
+<br> .................................radioButton..................................
+<ext:Radio LabelWidth="40" Name="radio" ID="rbTimeCardAll" LabelSeparator=" " IDMode="Static" Checked="true" FieldLabel="All"
+  runat="server">
+  <Listeners>
+    <Change Fn="getClockOutValue" />
+  </Listeners>
+</ext:Radio>
 
 
+<br><br> ................................................tooltip on Button ...................................................
+<br>
 <ext:Button ID="line" runat="server" IDMode="Static" Text="Line" IconCls="lineiconCls">
   <Listeners>
     <Click Fn="setChartName"></Click>
@@ -363,7 +364,9 @@
   </ToolTips>
 </ext:Button>
 
-<br> ................................................tooltip on Button ...................................................
+
+
+<br> ................................................Text Area ...................................................
 <br>
 
 
@@ -385,3 +388,9 @@
     <KeyPress Fn="setFocusToBuyingCost"></KeyPress>
   </Listeners>
 </ext:TextArea>
+
+
+...................................UploadFile..............................
+
+<ext:FileUploadField runat="server" ID="filedataImport" Width="250">
+</ext:FileUploadField>

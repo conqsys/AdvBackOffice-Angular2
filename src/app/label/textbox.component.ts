@@ -3,8 +3,8 @@ import { ListenersComponent } from './listeners';
 
 @Component({
   selector: 'ext:TextField',
-  template: `<ng-content></ng-content> <input pInputText type="text" [ngModel]="textBoxContent" 
-    placeholder="Type your name" (ngModelChange)="valuechange($event)"/>`,
+  template: `<ng-content></ng-content> <input pInputText type="text" [(ngModel)]="textBoxContent" 
+    (click)="blurEventHandler()" placeholder="Type your name"> `,
 })
 
 export class TextBoxComponent implements AfterViewInit, DoCheck {
@@ -63,6 +63,6 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
   }
 
   ngDoCheck() {
-    console.log(this.listeners);
+    // console.log(this.listeners);
   }
 }
