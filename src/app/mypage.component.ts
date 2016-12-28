@@ -196,9 +196,17 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
 
 
  //Number Field Functions
-  numberFieldFunction() {
-    console.log('numberField');
+  numberFieldFunction1() {
+    alert('numberField');
   }
+   numberFieldFunction2() {
+   alert('numberField');
+  }
+  
+   numberFieldFunction3() {
+    alert('numberField');
+  }
+  
   
   textBoxFunction() {
     alert('keyDownFunction');

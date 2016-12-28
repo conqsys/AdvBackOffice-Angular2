@@ -4,7 +4,7 @@ import { ListenersComponent } from './listeners';
 @Component({
   selector: 'ext:TextField',
   template: `<ng-content></ng-content> <input pInputText type="text" [(ngModel)]="textBoxContent" 
-    (blur)="blurEventHandler()" placeholder="Type your name"> `,
+    (click)="blurEventHandler()" placeholder="Type your name"> `,
 })
 
 export class TextBoxComponent implements AfterViewInit, DoCheck {

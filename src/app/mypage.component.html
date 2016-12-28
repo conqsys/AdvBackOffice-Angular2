@@ -250,21 +250,21 @@
 <ext:NumberField ID="NumberField1" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Blur Fn="numberFieldFunction" />
+    <Blur Fn="numberFieldFunction1" />
   </Listeners>
 </ext:NumberField>
 2
 <ext:NumberField ID="NumberField2" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Click Fn="numberFieldFunction" />
+    <Click Fn="numberFieldFunction2" />
   </Listeners>
 </ext:NumberField>
 3
 <ext:NumberField ID="NumberField3" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Show Fn="numberFieldFunction" />
+    <Show Fn="numberFieldFunction3" />
   </Listeners>
 </ext:NumberField>
 4
@@ -340,3 +340,30 @@
 <button pButton type="button" (click)="Show()" label="Show/Hide"></button>
 <br><br>
 <button pButton type="button" (click)="comboApiCall()" label="Call API"></button>
+
+
+<br>
+<br> ................................................CheckBox...................................................
+<br>
+<ext:Button ID="btnShowPayPinEdtior" runat="server" ToolTip="Reset editors" Icon="Cancel" AllowDepress="true" EnableToggle="true"
+  IDMode="Static">
+  <Listeners>
+    <Toggle Fn="invPayPinEditors" />
+  </Listeners>
+</ext:Button>
+
+<ext:LinkButton ColumnWidth=".4" FocusOnToFront="true" runat="server" ToolTip="Edit" Hidden="true" IDMode="Static" Width="50"
+  ID="txtGameName">
+  <Listeners>
+    <Click Fn="showLotteryGameForEdit" />
+  </Listeners>
+  <DirectEvents>
+    <Click Url="/Lottery/LotteryGameDetail">
+      <ExtraParams>
+        <ext:Parameter Name="containerId" Value="dialogformLotteryGame" Mode="Value" />
+        <ext:Parameter Name="isPopup" Value="true" Mode="Value" />
+      </ExtraParams>
+      <EventMask Target="CustomTarget" ShowMask="true" CustomTarget="App.windowLotteryGames" />
+    </Click>
+  </DirectEvents>
+</ext:LinkButton>
