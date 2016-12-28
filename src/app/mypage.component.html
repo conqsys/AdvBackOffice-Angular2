@@ -335,17 +335,46 @@
     <Change Fn="getClockOutValue" />
   </Listeners>
 </ext:Radio>
-<br><br> ...................................UploadFile..............................
+<br><br> ................................................tooltip on Button ...................................................
+<br>
+<ext:Button ID="line" runat="server" IDMode="Static" Text="Line" IconCls="lineiconCls">
+  <Listeners>
+    <Click Fn="setChartName"></Click>
+  </Listeners>
+  <ToolTips>
+    <ext:ToolTip ID="tooltipline" runat="server" Html="Line Chart" />
+  </ToolTips>
+</ext:Button>
+
+<br> ................................................tooltip on Button ...................................................
+<br>
+
+
+<ext:TextArea ID="txtNotes" FieldLabel="Notes" LabelWidth="50" Height="100" LabelAlign="Top" Width="218" LabelSeparator=" "
+  IDMode="Static" runat="server" DataIndex="Notes"></ext:TextArea>
+
+
+<ext:TextArea Height="25" runat="server" ID="txtDDescription1" IDMode="Static" FieldLabel="Description" EnableKeyEvents="true"
+  TabIndex="0" Name="Description">
+  <Listeners>
+    <KeyDown Fn="setFocusToBuyingCost"></KeyDown>
+  </Listeners>
+</ext:TextArea>
+
+<ext:TextArea Height="25" runat="server" ID="txtDDescription" IDMode="Static" FieldLabel="Description" EnableKeyEvents="true"
+  TabIndex="0" Name="Description">
+  <Listeners>
+    <KeyPress Fn="setFocusToBuyingCost"></KeyPress>
+  </Listeners>
+</ext:TextArea>
+...................................UploadFile..............................
 <ext:FileUploadField runat="server" ID="filedataImport" Width="250">
 </ext:FileUploadField>
-
-<<<<<<< HEAD
-
+<br><br>
 <button pButton type="button" (click)="getCheckBoxValue()" label="GetValue">getCheckBoxValue</button>
-=======
 <br><br>
 <button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
->>>>>>> 2b9cfcc3bbf6bd1a084e1aa869fbd4e6d48dfdbd
+
 <br><br>
 <button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue">setCheckBoxValue</button>
 <br><br>
