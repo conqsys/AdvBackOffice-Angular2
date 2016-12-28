@@ -27,6 +27,7 @@ import { PanelComponent } from './label/panel.component';
 import { ComboBoxComponent } from './label/combobox.component';
 import { DateFieldComponent } from './label/date-field.component';
 import { LinkButtonComponent } from './label/linkButton.component';
+import {TextAreaComponent} from './label/textarea.component'
 import { RadioComponent } from './label/radio.component';
 import { CommonService } from './label/common.service';
 import { Store } from './label/store.component';
@@ -46,6 +47,7 @@ import {
 
 } from 'primeng/primeng';
 
+import {DepartmentDetailComponent} from './department/department-detail.component'
 /* sky-app components end */
 
 @NgModule({
@@ -86,7 +88,9 @@ import {
     ExtraParams,
     StoreParameter,
     ListenersComponent,
-    ClickEvent
+    ClickEvent,
+    TextAreaComponent,
+    DepartmentDetailComponent
   ],
   providers: [ExtEvent, ExtBaseComponent, CommonService, Store],
   bootstrap: [AppComponent],

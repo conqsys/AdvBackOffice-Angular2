@@ -15,6 +15,8 @@ import { NumberComponent } from './label/number.component';
 import { TextBoxComponent } from './label/textbox.component';
 import { CheckboxComponent } from './label/checkbox.component';
 import { RadioComponent } from './label/radio.component';
+import { TextAreaComponent } from './label/textarea.component';
+
 
 @Component({
   selector: 'mypage',
@@ -31,6 +33,9 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(TextBoxComponent) textBoxes: QueryList<TextBoxComponent>;
   @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
   @ViewChildren(RadioComponent) radioButtons: QueryList<RadioComponent>;
+  @ViewChildren(TextAreaComponent) textareas: QueryList<TextAreaComponent>;
+
+  
 
   title = 'AdvBack Office Development';
   app: AppController;
@@ -91,15 +96,15 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
       });
     }
     if (this.labels) {
-      this.labels.toArray().forEach(comp =>{
-        Object.defineProperty(self,comp.props.ID.value,{
+      this.labels.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
           writable: true,
           enumerable: true,
-          configurable:true,
+          configurable: true,
           value: comp
         });
       });
-       
+
     }
     if (this.linkButtons) {
       this.linkButtons.toArray().forEach(comp => {
@@ -145,7 +150,20 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
+
+     if (this.textareas) {
+      this.textareas.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+    }
     this.getDefaultRadioButtonsValue();
+
+    this.App.txtDDescription1.setValue('Hii Demo..!!')
   }
 
 
@@ -271,6 +289,10 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
 
   click() {
     console.log('d');
+  }
+
+  setFocusToBuyingCost() {
+    alert('textarea');
   }
 
 }

@@ -1,0 +1,204 @@
+
+   <ext:Store runat="server" ID="dsDepartmentHeader" AutoLoad="true" IDMode="Static" >
+       <Proxy>
+            <ext:AjaxProxy Url="/TestDepartmentData/GetDepartmentByID" >
+                <Reader>
+                    <ext:JsonReader IDProperty="DepartmentID" Root="data" TotalProperty="total"/>                    
+                </Reader>
+                <Writer>
+                    <ext:JsonWriter Encode="true" Root="data" />    
+                </Writer>
+            </ext:AjaxProxy>           
+        </Proxy>        
+        <SyncParameters>
+            <ext:StoreParameter Name="action" Value="operation.action" Mode="Raw" />
+        </SyncParameters>
+        <Model>
+         <ext:Model runat="server">
+                <Fields>
+                    <ext:ModelField Name="DepartmentID" SortDir="ASC" Type="Int"/>                  
+                    <ext:ModelField Name="DepartmentDescription" Type="String" />                    
+                    <ext:ModelField Name="DepartmentTypeID" Type="Int" /> 
+                    <ext:ModelField Name="ActiveFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="DisplayPromptMethodID" Type="Int" /> 
+                    <ext:ModelField Name="AudibleAgeVerificationAlertFlag" Type="Boolean" />                     
+                    <ext:ModelField Name="POSSyncStatusCode" Type="String" /> 
+                    <ext:ModelField Name="LastSyncDateTime" Type="Date" /> 
+                    <ext:ModelField Name="IsDepartmentOpen" Type="Boolean" /> 
+                    <ext:ModelField Name="IsFractionalQtyAllowedFlag" Type="Boolean" />     
+                    <ext:ModelField Name="IsLoyaltyRedeemEligibleFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="IsItemReturnableFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="DepartmentProfitMargin" Type="Float" /> 
+                    <ext:ModelField Name="ProfitPercent" Type="Float" />
+                    <ext:ModelField Name="Fax" Type="String" /> 
+                    <ext:ModelField Name="AllowFoodStampsFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="AreSpecialDiscountsAllowedFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="MinimumOpenSaleAmount" Type="Float" />
+                    <ext:ModelField Name="MaximumOpenSaleAmount" Type="Float" /> 
+                    <ext:ModelField Name="DepartmentTypeName" Type="String" />   
+                    <ext:ModelField Name="DisplayPromptMethodDesc" Type="String" />  
+                    <ext:ModelField Name="SalesRestrictionRequiredFlag" Type="Boolean" /> 
+                    <ext:ModelField Name="IsDepartmentNegative" Type="Boolean" /> 
+                    <ext:ModelField Name="PriceRequiredFlag" Type="Boolean" />                    
+                </Fields>
+         </ext:Model>
+        </Model>
+        <Parameters>
+            <!--<ext:StoreParameter Name="id" Value="getDepIDBySelectedIndex('')" Mode="Raw"  />          -->
+        </Parameters>
+        <Listeners>
+            <!--<Load fn="departmentLoaded"  />  
+            <Write Fn="saveDepartmentDone" />   -->
+        </Listeners>
+    </ext:Store>
+
+<ext:Store ID="dsDepartmentTypes" runat="server" RemoteSort="true" AutoLoad="false" UseIdConfirmation="true">
+    <Proxy>
+        <ext:AjaxProxy Url="/DepartmentTypeData/GetDepartmentTypes" NoCache="false">
+            <Reader>
+                <ext:JsonReader IDProperty="DepartmentTypeID" Root="data" TotalProperty="total" />
+            </Reader>
+        </ext:AjaxProxy>
+    </Proxy>
+    <Model>
+        <ext:Model runat="server">
+            <Fields>
+                <ext:ModelField Name="DepartmentTypeID" SortDir="ASC" />
+                <ext:ModelField Name="DepartmentTypeName" />
+                <ext:ModelField Name="IsFractionalQtyAllowedFlag" Type="Boolean" />
+                <ext:ModelField Name="IsItemReturnableFlag" Type="Boolean" />
+                <ext:ModelField Name="AllowFoodStampsFlag" Type="Boolean" />
+                <ext:ModelField Name="SalesRestrictionRequiredFlag" Type="Boolean" />
+                <ext:ModelField Name="IsDepartmentNegative" Type="Boolean" />
+            </Fields>
+        </ext:Model>
+    </Model>
+    <Listeners>
+        <!--<Load Handler="App.dsDisPromptMethods.reload();" />-->
+    </Listeners>
+</ext:Store>
+
+<ext:Store ID="dsDisPromptMethods" runat="server" FilterOnLoad="false" RemoteSort="true" AutoLoad="false" UseIdConfirmation="true">
+    <Proxy>
+        <ext:AjaxProxy Url="/DisPromptMethodData/GetDisplayPromptMethods" NoCache="false">
+            <Reader>
+                <ext:JsonReader IDProperty="DisplayPromptMethodID" Root="data" TotalProperty="total" />
+            </Reader>
+        </ext:AjaxProxy>
+    </Proxy>
+    <Model>
+        <ext:Model runat="server">
+            <Fields>
+                <ext:ModelField Name="DisplayPromptMethodID" SortDir="ASC" />
+                <ext:ModelField Name="DisplayPromptMethodDesc" />
+            </Fields>
+        </ext:Model>
+    </Model>
+</ext:Store>
+
+<div id="formpanel" style="clear:both;">
+       <ext:FormPanel ID="DepartmentFormPanel" runat="server"  Padding="10" 
+                ButtonAlign="Right" Border="false" Width="1000" Height="300" Layout="ColumnLayout" IDMode="Static">
+            <Items> 
+                <!--<ext:FieldSet LabelSeparator=" " ColumnWidth=".40" ID="rightDepPanel5" runat="server" Border="false" IDMode="Static">
+                    <Defaults>
+                         <ext:Parameter Name="LabelWidth" Value="170" />
+                         <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
+                    </Defaults>
+                    <Items>-->
+                        <ext:ComboBox Width="300" AllowBlank="false" ID="cmbDepTypesA" runat="server" FieldLabel="Department Type" 
+                            Name="DepartmentTypeID" ValueField="StoreLocationID"  DisplayField="StoreName" 
+                            StoreID="dsDepartmentTypes" IDMode="Static" QueryMode="Local" TypeAhead="true" >                            
+                            <Listeners>
+                                <Select Fn="DepartmentTypeSuccess">
+                                </Select>
+                            </Listeners>
+                        </ext:ComboBox>
+                        <ext:ComboBox Width="300" ID="cmbDisPromptMethod"  runat="server" FieldLabel="Display Prompt Method" 
+                        StoreID="dsDisPromptMethods"  ValueField="DisplayPromptMethodID" DisplayField="DisplayPromptMethodDesc"
+                        Name="DisplayPromptMethodID"   QueryMode="Local" TypeAhead="true"  IDMode="Static">                       
+                        </ext:ComboBox>
+                        <ext:TextField ID="txtDepDesc" runat ="server" FieldLabel="Description" AllowBlank="false" IDMode="Static" Name="DepartmentDescription"></ext:TextField>
+                        <ext:TextField ID="txtDepProfitMargin" runat ="server" FieldLabel="Profit Margin" IDMode="Static" Name="DepartmentProfitMargin"></ext:TextField>                      
+                     <ext:TextField ID="txtDepProfitPercent" runat ="server" FieldLabel="Profit Percent" IDMode="Static" Name="ProfitPercent"></ext:TextField>                
+                        <ext:TextField ID="txtMinSaleAmount" runat ="server" FieldLabel="Minimum Open Sale Amount" IDMode="Static" Name="MinimumOpenSaleAmount">
+                            <Listeners>
+                                <Blur Fn="setDollorSignFoSaleAmt"></Blur>
+                            </Listeners>
+                           
+                        </ext:TextField>                    
+                        <ext:TextField ID="txtMaxSaleAmount" runat ="server" FieldLabel="Maximum Open Sale Amount" IDMode="Static" Name="MaximumOpenSaleAmount">
+                            <Listeners>
+                                <Blur Fn="setDollorSignFoSaleAmt"></Blur>
+                            </Listeners>
+                        </ext:TextField>                                                                                       
+                    <!--</Items>-->
+                <!--</ext:FieldSet>            -->
+                <!--<ext:Panel LabelWidth="200" ColumnWidth=".40" ID="rightDepPanel" runat="server" Header="false" Border="false">
+                    <Items>
+                        <ext:Panel ColumnWidth=".20" ID="rightDepPanel1" runat="server" Title="Other Flags" Border="true" Height="270" BodyStyle="padding:5px 0 0 10px" >
+                            <Items>
+                                <ext:FieldSet ID="FieldSet1" runat="server" Border="false">
+                                    <Defaults>
+                                        <ext:Parameter Name="LabelWidth" Value="200"></ext:Parameter>
+                                        <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
+                                    </Defaults>
+                                    <Items>                                -->
+                                        <ext:Checkbox ID="chkActiveFlag" runat ="server" FieldLabel="Active Department" IDMode="Static" Name="ActiveFlag"></ext:Checkbox>              
+                                        <ext:Checkbox ID="chkIsDepartmentOpen" runat ="server" FieldLabel="Allow Open Sales In Department " IDMode="Static" Name="IsDepartmentOpen"></ext:Checkbox>  
+                                        <ext:Checkbox ID="chkIsFractionalQtyAllowedFlag" runat ="server" FieldLabel="Allow Partial Quantity Sales" IDMode="Static" Name="IsFractionalQtyAllowedFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsLoyaltyRedeemEligibleFlag" runat ="server" FieldLabel="Allow Loyalty Redeem Sales" IDMode="Static" Name="IsLoyaltyRedeemEligibleFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsItemReturnableFlag" runat ="server" FieldLabel="Allow Item Returns" IDMode="Static" Name="IsItemReturnableFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkAllowFoodStampsFlag" runat ="server" FieldLabel="Allow Food Stamp Sales" IDMode="Static" Name="AllowFoodStampsFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkAreSpecialDiscountsAllowedFlag" runat ="server" FieldLabel="Allow Special Discounts" IDMode="Static" Name="AreSpecialDiscountsAllowedFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsPriceRequiredFlag" runat ="server" FieldLabel="Flexible Pricing For Items" IDMode="Static" Name="PriceRequiredFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkSalesRestrictionRequiredFlag" runat ="server" FieldLabel="SalesRestrictionRequiredFlag" IDMode="Static" Name="SalesRestrictionRequiredFlag" Hidden="true"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsDepartmentNegative" Disabled="true" runat ="server" FieldLabel="Department Negative" IDMode="Static" Name="IsDepartmentNegative"></ext:Checkbox>                                      
+
+                                    <!--</Items>
+                                </ext:FieldSet>-->
+                            <!--</Items>
+                        </ext:Panel>
+                        <ext:Panel LabelWidth="200" ColumnWidth=".20" ID="rightDepPanel3" runat="server" Header="false" Border="false">
+                            <Items></Items>
+                        </ext:Panel>
+                    </Items>-->
+                <!--</ext:Panel>            -->
+        </Items>
+    </ext:FormPanel>
+    <div style="padding: 10px 0 10px 550px;">
+
+        <div style="float: left; width: 110px">
+            <ext:Button ID="btnMoveDepartment" runat="server" Text="Move Department" Width="100" Height="25" IDMode="Static">
+                <Listeners>
+                    <Click Fn="showMoveDepartmentWindow" />
+                </Listeners>
+                <DirectEvents>
+                    <Click Url="/Department/MoveDepartment" DisableCaching="false" Method="GET" Success="" Before="clearDialogDiv('dialogformDepartment')">
+                        <ExtraParams>
+                            <ext:Parameter Name="containerId" Value="dialogformDepartment" Mode="Value" />
+                            <ext:Parameter Name="isPopup" Value="true" Mode="Value" />
+                        </ExtraParams>
+                        <EventMask Target="CustomTarget" ShowMask="true" CustomTarget="windowDepartmentDetails" />
+                    </Click>
+                </DirectEvents>
+            </ext:Button>
+        </div>
+
+        <div style="float: left; width: 100px">
+            <ext:Button ID="btnSaveDepartment" runat="server" Text="Save" Width="90" Height="25" IDMode="Static">
+                <Listeners>
+                    <Click Fn="saveDepartmentForm" />
+                </Listeners>
+            </ext:Button>
+        </div>
+        <div style="float: left; width: 100px">
+            <ext:Button ID="btnSaveCloseDepartment" runat="server" Text="Save & Close" Width="90" Height="25" IDMode="Static">
+                <Listeners>
+                    <Click Fn="saveCloseDepartmentForm" />
+                </Listeners>
+            </ext:Button>
+        </div>
+    </div>
+
+</div>

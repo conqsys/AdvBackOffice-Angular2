@@ -2,13 +2,17 @@ import { ContentChild, DoCheck, ViewContainerRef, Component, ElementRef, ChangeD
 import { ListenersComponent } from './listeners';
 @Component({
   selector: 'ext:Button',
-  template: `<ng-content></ng-content> <button (click)="onClickHandler($event)">{{props.Text.value}}test</button>`,
+  template: `<ng-content></ng-content>
+             <button (click)="onClickHandler($event)" pTooltip={{tooltipMsg}} >{{props.Text.value}}test</button>`,
 })
 export class ButtonComponent implements AfterViewInit, DoCheck {
 
   @ContentChild(ListenersComponent) listeners: ListenersComponent;
 
   myParent: any;
+  tooltips: any;
+  tooltipListner: any;
+  tooltipMsg: any;
   constructor(private element: ElementRef, private cd: ChangeDetectorRef
     , private vcRef: ViewContainerRef
   ) {
@@ -43,5 +47,14 @@ export class ButtonComponent implements AfterViewInit, DoCheck {
   }
 
   ngAfterViewInit() {
+    
+        this.tooltips = this.element.nativeElement.querySelector('ToolTips');
+    if (this.tooltips) {
+      this.tooltipListner = this.tooltips.querySelector('ToolTip');
+      if (this.tooltipListner) {
+        this.tooltipMsg = this.tooltipListner.attributes.Html.value;
+        
+      }
+    }
   }
 }
