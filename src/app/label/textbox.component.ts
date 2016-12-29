@@ -38,6 +38,10 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
     return this.textboxValue;
   }
 
+  public getRawValue(){
+     return this.textboxValue;
+  }
+
   public setValue(newValue: string) {
     this.textBoxContent = newValue;
   }
