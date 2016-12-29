@@ -35,7 +35,9 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(RadioComponent) radioButtons: QueryList<RadioComponent>;
   @ViewChildren(TextAreaComponent) textareas: QueryList<TextAreaComponent>;
 
+
  title = 'AdvBack Office Development';
+
   app: AppController;
   stores = Store[0];
   check: number = 1;
@@ -114,6 +116,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
+
     if (this.numberFields) {
       this.numberFields.toArray().forEach(comp => {
         Object.defineProperty(self, comp.props.ID.value, {
@@ -149,7 +152,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
       });
     }
 
-     if (this.textareas) {
+    if (this.textareas) {
       this.textareas.toArray().forEach(comp => {
         Object.defineProperty(self, comp.props.ID.value, {
           writable: true,
@@ -160,6 +163,8 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
       });
     }
     // this.getDefaultRadioButtonsValue();
+
+    this.App.txtDDescription1.setValue('Hii Demo..!!');
 
     // this.App.txtDDescription1.setValue('Hii Demo..!!');
   }
@@ -215,16 +220,11 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   }
 
   public comboApiCall() {
-    let url = this.App.cmbmoveDepartment.element.nativeElement
-      .querySelectorAll('DirectEvents')[0]
-      .querySelectorAll('Select')[0]
-      .attributes[0].nodeValue;
-
+    // let url = this.App.cmbmoveDepartment.element.nativeElement
+    //   .querySelectorAll('DirectEvents')[0]
+    //   .querySelectorAll('Select')[0]
+    //   .attributes[0].nodeValue;
     // url call API
-
-
-
-
   }
 
   updateBulkStoreItem() {
@@ -244,25 +244,25 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   }
 
 
- //Number Field Functions
+  // Number Field Functions
   numberFieldFunction1() {
     alert('numberField');
   }
-   numberFieldFunction2() {
-   alert('numberField');
-  }
-  
-   numberFieldFunction3() {
+  numberFieldFunction2() {
     alert('numberField');
   }
-  
-  
+
+  numberFieldFunction3() {
+    alert('numberField');
+  }
+
+
   textBoxFunction() {
     alert('keyDownFunction');
   }
 
- 
-  //Set,Get textbox
+
+  // Set,Get textbox
 
   setTextBoxValue() {
     this.App.TextField3.setValue('Hi Deepak!');
@@ -272,7 +272,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
     this.txtData = this.App.TextField1.getValue();
   }
 
- //Set,Get Checkbox
+  // Set,Get Checkbox
   getCheckBoxValue() {
     // alert(this.App.chkShowLocation3);
     this.checkBoxValue1 = this.App.chkShowLocation1.getValue();
@@ -283,12 +283,10 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
 
   setCheckBoxValue() {
 
-    this.App.chkShowLocation1.setValue(true);    
+    this.App.chkShowLocation1.setValue(true);
   }
 
-  checkBoxClick(){
-    console.log('ff')
-
+  checkBoxClick() {
     this.App.chkShowLocation1.setValue(true);
     this.App.chkShowLocation1.setValue(true);
   }

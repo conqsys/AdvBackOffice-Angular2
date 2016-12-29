@@ -44,6 +44,10 @@ export class TextAreaComponent implements AfterViewInit, DoCheck {
     this.textAreaContent = newValue;
   }
 
+   public getRawValue(){
+     return this.textAreaValue;
+  }
+
 
   clickEventHandler(element) {
     let elements: any;

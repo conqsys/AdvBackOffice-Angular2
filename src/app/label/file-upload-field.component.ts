@@ -10,28 +10,26 @@ import { CommonService } from './common.service';
 
 @Component({
   selector: 'ext:FileUploadField',
-
   template: `
     <h3>FileUploadField</h3>
     <ng-content></ng-content>
-    <div>
-      <p-growl [value]="msgs"></p-growl>
-
-      <p-fileUpload name="demo[]" url="http://localhost:8081/upload" (onUpload)="onUpload($event)" 
+<p-growl [value]="msgs"></p-growl>
+    
+<p-fileUpload name="demo[]" (click) ="onUpload($event)" 
         multiple="multiple" accept="image/*" maxFileSize="1000000">
-        <template pTemplate type="content">
-          <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-          </ul>
-        </template>        
-      </p-fileUpload>
-    </div>
+    <template pTemplate type="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles"  >{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </template>        
+</p-fileUpload>
+    
     `
 })
 
 
 export class FileUploadFieldComponent implements OnInit {
-
+demo=[]
   msgs: Array<any> = [];
 
   uploadedFiles: any[] = [];
@@ -46,7 +44,7 @@ export class FileUploadFieldComponent implements OnInit {
     console.log(this.element.nativeElement.innerHTML);
   }
 
-  public get action(): string { 
+  public get action(): string {
     return '';
   }
 
@@ -60,17 +58,31 @@ export class FileUploadFieldComponent implements OnInit {
     return this.element.nativeElement.attributes;
   }
 
-  public onUpload(event) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
+  // msgs: Message[];
+    
+  //   uploadedFiles: any[] = [];
+
+    onUpload(event) {
+
+      alert(this.demo);
+        // for(let file of event.files) {
+        //     this.uploadedFiles.push(file);
+        // }    
+        // this.msgs = [];
+        // this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
-    this.commonService.upload().subscribe(res => {
-      let result = res;
-      console.log(result);
-    });
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-  }
+
+  // public onUpload(event) {
+  //   for (let file of event.files) {
+  //     this.uploadedFiles.push(file);
+  //   }
+  //   this.commonService.upload().subscribe(res => {
+  //     let result = res;
+  //     console.log(result);
+  //   });
+  //   this.msgs = [];
+  //   this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+  // }
 
 }
 
