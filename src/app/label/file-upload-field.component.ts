@@ -15,7 +15,7 @@ import { CommonService } from './common.service';
     <ng-content></ng-content>
 <p-growl [value]="msgs"></p-growl>
     
-<p-fileUpload name="demo[]" auto="auto" (onSelect)='onSelect($event)' 
+<p-fileUpload name="msgs[]" auto="auto" (onSelect)='onSelect($event)' 
         multiple="multiple" accept="image/*" maxFileSize="1000000">
     <template pTemplate type="content">
         <ul *ngIf="uploadedFiles.length">
@@ -71,6 +71,11 @@ export class FileUploadFieldComponent implements OnInit {
   // }
   onSelect(event) {
     alert(event)
+     for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+    this.msgs = [];
+    this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
   // public onUpload(event) {
   //   for (let file of event.files) {
