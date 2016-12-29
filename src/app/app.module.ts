@@ -45,6 +45,7 @@ import {
   MenubarModule,
   RadioButtonModule,
   TooltipModule,
+  PanelModule,
   FileUploadModule
 } from 'primeng/primeng';
 
@@ -59,6 +60,7 @@ import {DepartmentDetailComponent} from './department/department-detail.componen
     BrowserModule,
     ButtonModule,
     InputTextModule,
+    PanelModule,
     CalendarModule,
     TooltipModule,
     DropdownModule,
