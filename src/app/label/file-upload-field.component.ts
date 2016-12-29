@@ -15,7 +15,7 @@ import { CommonService } from './common.service';
     <ng-content></ng-content>
 <p-growl [value]="msgs"></p-growl>
     
-<p-fileUpload name="demo[]"  (onSelect)='onSelect($event)' 
+<p-fileUpload name="demo[]" auto="auto" (onSelect)='onSelect($event)' 
         multiple="multiple" accept="image/*" maxFileSize="1000000">
     <template pTemplate type="content">
         <ul *ngIf="uploadedFiles.length">
