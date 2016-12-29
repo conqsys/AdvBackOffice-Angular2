@@ -15,11 +15,11 @@ import { CommonService } from './common.service';
     <ng-content></ng-content>
 <p-growl [value]="msgs"></p-growl>
     
-<p-fileUpload name="demo[]" (click) ="onUpload($event)" 
+<p-fileUpload name="demo[]"  (onSelect)='onSelect($event)' 
         multiple="multiple" accept="image/*" maxFileSize="1000000">
     <template pTemplate type="content">
         <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles"  >{{file.name}} - {{file.size}} bytes</li>
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
         </ul>
     </template>        
 </p-fileUpload>
@@ -29,7 +29,7 @@ import { CommonService } from './common.service';
 
 
 export class FileUploadFieldComponent implements OnInit {
-demo=[]
+  demo = []
   msgs: Array<any> = [];
 
   uploadedFiles: any[] = [];
@@ -59,19 +59,19 @@ demo=[]
   }
 
   // msgs: Message[];
-    
+
   //   uploadedFiles: any[] = [];
 
-    onUpload(event) {
-
-      alert(this.demo);
-        // for(let file of event.files) {
-        //     this.uploadedFiles.push(file);
-        // }    
-        // this.msgs = [];
-        // this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
-    }
-
+  // onUpload(event) {
+  //   for (let file of event.files) {
+  //     this.uploadedFiles.push(file);
+  //   }
+  //   this.msgs = [];
+  //   this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+  // }
+  onSelect(event) {
+    alert(event)
+  }
   // public onUpload(event) {
   //   for (let file of event.files) {
   //     this.uploadedFiles.push(file);
