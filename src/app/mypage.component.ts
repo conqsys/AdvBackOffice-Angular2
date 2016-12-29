@@ -284,6 +284,13 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   setCheckBoxValue() {
 
     this.App.chkShowLocation1.setValue(true);
+
+    
+  }
+
+
+  setVisible(){
+    this.App.chkShowLocation4.setVisible(true)
   }
 
   checkBoxClick() {

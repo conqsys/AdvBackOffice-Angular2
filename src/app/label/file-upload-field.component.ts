@@ -77,17 +77,6 @@ export class FileUploadFieldComponent implements OnInit {
     this.msgs = [];
     this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
-  // public onUpload(event) {
-  //   for (let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  //   }
-  //   this.commonService.upload().subscribe(res => {
-  //     let result = res;
-  //     console.log(result);
-  //   });
-  //   this.msgs = [];
-  //   this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-  // }
 
 }
 
