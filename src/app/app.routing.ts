@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { MyPageComponent } from './mypage.component';
-import {DepartmentDetailComponent} from './department/department-detail.component'
+import {DepartmentDetailComponent} from './department/department-detail.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: '/department', pathMatch: 'full' },

@@ -5,7 +5,6 @@ import {
 export class ListItem {
   constructor(public label: string, public value: any) { }
 }
-
 import { CommonService } from './common.service';
 
 @Component({
@@ -29,12 +28,12 @@ import { CommonService } from './common.service';
 
 
 export class FileUploadFieldComponent implements OnInit {
-  demo = []
+  demo = [];
   msgs: Array<any> = [];
 
   uploadedFiles: any[] = [];
 
-  constructor(
+  constructor (
     private element: ElementRef,
     private cd: ChangeDetectorRef,
     private commonService: CommonService) {
@@ -70,7 +69,7 @@ export class FileUploadFieldComponent implements OnInit {
   //   this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   // }
   onSelect(event) {
-    alert(event)
+    alert(event.files[0].name);
      for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
