@@ -46,7 +46,7 @@ export class FileUploadFieldComponent implements OnInit {
     console.log(this.element.nativeElement.innerHTML);
   }
 
-  public get action(): string { 
+  public get action(): string {
     return '';
   }
 
