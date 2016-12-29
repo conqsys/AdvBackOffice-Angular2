@@ -1,6 +1,6 @@
 import {
   Component, ElementRef, OnInit,
-  ChangeDetectorRef
+  ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 export class ListItem {
   constructor(public label: string, public value: any) { }
@@ -10,16 +10,18 @@ export class ListItem {
   selector: 'ext:Panel',
 
   template: `
-    <h3>Panel</h3>
+    <p-panel [style]="{'width':columnWidth+'px'}" 
+    >
     <ng-content></ng-content>
-    <div>
-      
-    </div>`
+    </p-panel> `
 })
 
 
-export class PanelComponent implements OnInit {
-
+export class PanelComponent implements OnInit, AfterViewInit {
+  labelWidth: any;
+  columnWidth: number = 300;
+  panelId: any;
+  items: any;
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
   }
 
@@ -41,5 +43,14 @@ export class PanelComponent implements OnInit {
   public get props(): any {
     return this.element.nativeElement.attributes;
   }
+
+  ngAfterViewInit() {
+    // this.labelWidth = this.element.nativeElement.attributes.LabelWidth.value;
+    // this.columnWidth = this.element.nativeElement.attributes.ColumnWidth.value;
+   // this.columnWidth = 120;
+    // this.panelId = this.element.nativeElement.attributes.ID.value;
+    // this.items = this.element.nativeElement.querySelector('Items');
+}
+
 
 }

@@ -35,9 +35,7 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(RadioComponent) radioButtons: QueryList<RadioComponent>;
   @ViewChildren(TextAreaComponent) textareas: QueryList<TextAreaComponent>;
 
-  
-
-  title = 'AdvBack Office Development';
+ title = 'AdvBack Office Development';
   app: AppController;
   stores = Store[0];
   check: number = 1;
@@ -161,9 +159,9 @@ export class MyPageComponent implements DoCheck, OnInit, AfterViewInit {
         });
       });
     }
-    this.getDefaultRadioButtonsValue();
+    // this.getDefaultRadioButtonsValue();
 
-    this.App.txtDDescription1.setValue('Hii Demo..!!')
+    // this.App.txtDDescription1.setValue('Hii Demo..!!');
   }
 
 

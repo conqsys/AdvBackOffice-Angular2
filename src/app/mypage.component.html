@@ -214,31 +214,32 @@
         <ext:Parameter Name="LabelWidth" Value="200"></ext:Parameter>
       </Defaults>
       <Items>
-        <ext:Panel runat="server" Title="Other Flags" Border="true" Height="150" BodyStyle="padding:5px 0 0 10px" IDMode="Static">
-          <Items>
-            <ext:FieldSet ColumnWidth=".30" ID="Panel3" Border="false" runat="server">
-              <Defaults>
-                <ext:Parameter Name="LabelWidth" Value="320"></ext:Parameter>
-                <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
-              </Defaults>
-              <Items>
-                <!--<ext:Checkbox ID="chkIsBlueLaw2Enabled" runat="server" FieldLabel="BlueLaw2 Enable" IDMode="Static" Name="IsBlueLaw2Enabled"></ext:Checkbox>-->
-              </Items>
-            </ext:FieldSet>
+                    <ext:Panel ColumnWidth=".20" ID="rightDepPanel1" runat="server" Title="Other Flags" Border="true" Height="270" BodyStyle="padding:5px 0 0 10px" >
+                            <Items>
+                                <ext:FieldSet ID="FieldSet1" runat="server" Border="false">
+                                    <Defaults>
+                                        <ext:Parameter Name="LabelWidth" Value="200"></ext:Parameter>
+                                        <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
+                                    </Defaults>
+                                    <Items>                                
+                                        <ext:Checkbox ID="chkActiveFlag" runat ="server" FieldLabel="Active Department" IDMode="Static" Name="ActiveFlag"></ext:Checkbox>              
+                                        <ext:Checkbox ID="chkIsDepartmentOpen" runat ="server" FieldLabel="Allow Open Sales In Department " IDMode="Static" Name="IsDepartmentOpen"></ext:Checkbox>  
+                                        <ext:Checkbox ID="chkIsFractionalQtyAllowedFlag" runat ="server" FieldLabel="Allow Partial Quantity Sales" IDMode="Static" Name="IsFractionalQtyAllowedFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsLoyaltyRedeemEligibleFlag" runat ="server" FieldLabel="Allow Loyalty Redeem Sales" IDMode="Static" Name="IsLoyaltyRedeemEligibleFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsItemReturnableFlag" runat ="server" FieldLabel="Allow Item Returns" IDMode="Static" Name="IsItemReturnableFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkAllowFoodStampsFlag" runat ="server" FieldLabel="Allow Food Stamp Sales" IDMode="Static" Name="AllowFoodStampsFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkAreSpecialDiscountsAllowedFlag" runat ="server" FieldLabel="Allow Special Discounts" IDMode="Static" Name="AreSpecialDiscountsAllowedFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsPriceRequiredFlag" runat ="server" FieldLabel="Flexible Pricing For Items" IDMode="Static" Name="PriceRequiredFlag"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkSalesRestrictionRequiredFlag" runat ="server" FieldLabel="SalesRestrictionRequiredFlag" IDMode="Static" Name="SalesRestrictionRequiredFlag" Hidden="true"></ext:Checkbox>
+                                        <ext:Checkbox ID="chkIsDepartmentNegative" Disabled="true" runat ="server" FieldLabel="Department Negative" IDMode="Static" Name="IsDepartmentNegative"></ext:Checkbox>                                      
+                                    </Items>
+                                </ext:FieldSet>
+                            </Items>
+                        </ext:Panel>     
           </Items>
-        </ext:Panel>
-        <ext:Panel ColumnWidth=".20" ID="Panel4" runat="server" Header="false" Border="false">
-          <Items></Items>
-        </ext:Panel>
-      </Items>
     </ext:FieldSet>
-    <ext:Panel LabelSeparator=" " ColumnWidth=".30" ID="Panel5" runat="server" Header="false" Border="false">
-      <Items>
-      </Items>
-    </ext:Panel>
   </Items>
 </ext:FormPanel>
-
 <br><br>
 
 <ext:Toolbar></ext:Toolbar>
@@ -250,21 +251,21 @@
 <ext:NumberField ID="NumberField1" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Blur Fn="numberFieldFunction1" />
+    <Blur Fn="numberFieldBlur" />
   </Listeners>
 </ext:NumberField>
 2
 <ext:NumberField ID="NumberField2" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Click Fn="numberFieldFunction2" />
+    <Click Fn="numberFieldClick" />
   </Listeners>
 </ext:NumberField>
 3
 <ext:NumberField ID="NumberField3" AllowBlank="false" Hidden="true" MinValue="1" runat="server" IDMode="Static" Name="UnitsInCase"
   Width="150">
   <Listeners>
-    <Show Fn="numberFieldFunction3" />
+    <Show Fn="numberFieldShow" />
   </Listeners>
 </ext:NumberField>
 4
@@ -277,17 +278,17 @@
 <br>
 <ext:TextField runat="server" ID="TextField1" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <KeyDown Fn="textBoxFunction" />
+    <KeyDown Fn="keyDownFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField2" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Blur Fn="textBoxFunction" />
+    <Blur Fn="blurFunction" />
   </Listeners>
 </ext:TextField>
 <ext:TextField runat="server" ID="TextField3" IDMode="Static" EnableKeyEvents="true" FieldLabel="Filter" LabelWidth="50">
   <Listeners>
-    <Click Fn="textBoxFunction" />
+    <Click Fn="clickFunction" />
   </Listeners>
 </ext:TextField>
 
@@ -295,30 +296,32 @@
 <button (click)="setTextBoxValue()"> Set </button>
 <button (click)="getTextBoxValue()"> Get </button>
 
+
+
 <br>
 <br> ................................................CheckBox...................................................
 <br>
 <ext:Checkbox runat="server" ID="chkShowLocation1" IDMode="Static" Width="20" FieldLabel="A">
   <Listeners>
-    <Change Fn="checkBoxClick" />
+    <Change Fn="click" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation2" IDMode="Static" Width="20" FieldLabel="B">
   <Listeners>
-    <Change Fn="checkBoxClick" />
+    <Change Fn="click" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation3" IDMode="Static" Width="20" FieldLabel="C">
   <Listeners>
-    <Change Fn="checkBoxClick" />
+    <Change Fn="click" />
   </Listeners>
 </ext:Checkbox>
 
 <ext:Checkbox runat="server" ID="chkShowLocation4" IDMode="Static" Width="20" FieldLabel="D">
   <Listeners>
-    <Change Fn="checkBoxClick" />
+    <Change Fn="click" />
   </Listeners>
 </ext:Checkbox>
 
@@ -326,24 +329,6 @@
 <br> checkBox2:{{checkBoxValue2}}
 <br> checkBox3:{{checkBoxValue3}}
 <br> checkBox4:{{checkBoxValue4}}
-
-
-<br><br>
-<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue">getCheckBoxValue</button>
-<br><br>
-<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
-
-<br><br>
-<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue">setCheckBoxValue</button>
-<br><br>
-
-<button pButton type="button" (click)="setValue()" label="set Values"></button>
-<br><br>
-<button pButton type="button" (click)="Show()" label="Show/Hide"></button>
-<br><br>
-<button pButton type="button" (click)="comboApiCall()" label="Call API"></button>
-
-
 <br> .................................radioButton..................................
 <ext:Radio LabelWidth="40" Name="radio" ID="rbTimeCardAll" LabelSeparator=" " IDMode="Static" Checked="true" FieldLabel="All"
   runat="server">
@@ -353,44 +338,13 @@
 </ext:Radio>
 
 
-<br><br> ................................................tooltip on Button ...................................................
-<br>
-<ext:Button ID="line" runat="server" IDMode="Static" Text="Line" IconCls="lineiconCls">
-  <Listeners>
-    <Click Fn="setChartName"></Click>
-  </Listeners>
-  <ToolTips>
-    <ext:ToolTip ID="tooltipline" runat="server" Html="Line Chart" />
-  </ToolTips>
-</ext:Button>
+<button pButton type="button" (click)="getCheckBoxValue()" label="GetValue"></button>
+<br><br>
+<button pButton type="button" (click)="setCheckBoxValue()" label="Setvalue"></button>
+<br><br>
 
-
-
-<br> ................................................Text Area ...................................................
-<br>
-
-
-  <ext:TextArea ID="txtNotes" FieldLabel="Notes" LabelWidth="50" Height="100" LabelAlign="Top" Width="218" LabelSeparator=" "
-    IDMode="Static" runat="server" DataIndex="Notes">
-    </ext:TextArea>
-
-
-<ext:TextArea Height="25" runat="server" ID="txtDDescription1" IDMode="Static" FieldLabel="Description" EnableKeyEvents="true"
-  TabIndex="0" Name="Description">
-  <Listeners>
-    <KeyDown Fn="setFocusToBuyingCost"></KeyDown>
-  </Listeners>
-</ext:TextArea>
-
-<ext:TextArea Height="25" runat="server" ID="txtDDescription" IDMode="Static" FieldLabel="Description" EnableKeyEvents="true"
-  TabIndex="0" Name="Description">
-  <Listeners>
-    <KeyPress Fn="setFocusToBuyingCost"></KeyPress>
-  </Listeners>
-</ext:TextArea>
-
-
-...................................UploadFile..............................
-
-<ext:FileUploadField runat="server" ID="filedataImport" Width="250">
-</ext:FileUploadField>
+<button pButton type="button" (click)="setValue()" label="set Values"></button>
+<br><br>
+<button pButton type="button" (click)="Show()" label="Show/Hide"></button>
+<br><br>
+<button pButton type="button" (click)="comboApiCall()" label="Call API"></button>
