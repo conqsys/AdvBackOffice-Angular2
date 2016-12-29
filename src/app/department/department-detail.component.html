@@ -44,11 +44,11 @@
          </ext:Model>
         </Model>
         <Parameters>
-            <!--<ext:StoreParameter Name="id" Value="getDepIDBySelectedIndex('')" Mode="Raw"  />          -->
+            <ext:StoreParameter Name="id" Value="getDepIDBySelectedIndex('')" Mode="Raw"  />          
         </Parameters>
         <Listeners>
-            <!--<Load fn="departmentLoaded"  />  
-            <Write Fn="saveDepartmentDone" />   -->
+            <Load fn="departmentLoaded"  />  
+            <!--<Write Fn="saveDepartmentDone" />   -->
         </Listeners>
     </ext:Store>
 
@@ -120,7 +120,7 @@
                         </ext:ComboBox>
                         <ext:TextField ID="txtDepDesc" runat ="server" FieldLabel="Description" AllowBlank="false" IDMode="Static" Name="DepartmentDescription"></ext:TextField>
                         <ext:TextField ID="txtDepProfitMargin" runat ="server" FieldLabel="Profit Margin" IDMode="Static" Name="DepartmentProfitMargin"></ext:TextField>                      
-                     <ext:TextField ID="txtDepProfitPercent" runat ="server" FieldLabel="Profit Percent" IDMode="Static" Name="ProfitPercent"></ext:TextField>                
+                        <ext:TextField ID="txtDepProfitPercent" runat ="server" FieldLabel="Profit Percent" IDMode="Static" Name="ProfitPercent"></ext:TextField>                
                         <ext:TextField ID="txtMinSaleAmount" runat ="server" FieldLabel="Minimum Open Sale Amount" IDMode="Static" Name="MinimumOpenSaleAmount">
                             <Listeners>
                                 <Blur Fn="setDollorSignFoSaleAmt"></Blur>

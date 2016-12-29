@@ -17,18 +17,19 @@ export class Store {
   public commonService: any;
   private apiServiceBase: string = 'http://localhost:13505/';
   constructor() {
+
   }
 
   public static getAllStores(element: any, myParent: any, service: any): Store[] {
 
     let elements = element.querySelectorAll('Store');
-
-    let stores = new Array<Store>();
+    // let stores = new Array<Store>();
+    let stores = new Array<any>();
     for (let i = 0; i < elements.length; i++) {
       let store = Store.CreateStoreForElement(elements[i]);
       store.myParent = myParent;
-      store.storeElement = element;
-      store.commonService = service;;
+      store.storeElement = elements[i];
+      store.commonService = service;
       stores.push(store);
     }
     return stores;
@@ -52,7 +53,6 @@ export class Store {
           callToService = url + '?' +
             this.getUrlParameterString(this.myParent, parameters);
           console.log(callToService);
-
         } else {
           callToService = url;
         }
@@ -67,7 +67,7 @@ export class Store {
                 event = loadEvent.attributes.Handler.value.replace('App.', 'this.App.');
                 eval(event).call(this.myParent);
               } else {
-                this.myParent[loadEvent.attributes.Fn]();
+                this.myParent[loadEvent.attributes.fn.value]('', this.data.items);
               }
             }
           }
@@ -86,7 +86,11 @@ export class Store {
         let funcName = '';
         let paramValue = '';
         if (param.attributes.Value.value.indexOf('(') !== -1 && param.attributes.Value.value.indexOf(')') !== -1) {
-          funcName = param.attributes.Value.value.replace('App.', 'this.App.'); // .replace('()', '');
+          if (param.attributes.Value.value.indexOf('App.') >= 0) {
+            funcName = param.attributes.Value.value.replace('App.', 'this.App.'); // .replace('()', '');
+          } else {
+            funcName = 'this.App.' + param.attributes.Value.value;
+          }
           // var a='updateBulkStoreItem';
           // paramValue = parentComponent[funcName]();
           paramValue = function () { return eval(funcName); }.call(parentComponent);

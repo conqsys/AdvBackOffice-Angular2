@@ -20,6 +20,8 @@ import { CommonService } from '../label/common.service';
 
 export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit {
     @ViewChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
+    //   @ViewChildren(DateFieldComponent) dateFields: QueryList<DateFieldComponent>;
+    @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
     @ViewChildren(TextBoxComponent) textBoxs: QueryList<TextBoxComponent>;
 
     // cmbStoreLocation: ComboBoxComponent;
@@ -36,22 +38,34 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
     App: any = this;
     isSaveCloseClick: boolean = false;
     check: number = 1;
-    myParent: any;
+
     count: number = 0;
+    // declare it for test perpose
+    isNewDepartmentSource: boolean;
+    depID: number = 0;
+    selIndex: number = 0;
+    isDepNext: boolean = false;
+    isDepPrev: boolean = false;
+    currentRecord: number = 1;
+    totalRecord: number = 0;
+    activetabdep: string = '';
+    isNextorPrevClickdep: boolean = false;
+    depRowindex: number = 0;
+    isDepLocationNextPrev: boolean = true; // var to check department location tab on next click
+    isDepChartNextPrev: boolean = true;    // var to check department chart tab on next previous click
+    chartname: string = 'Column';
+
     constructor(private element: ElementRef,
         private commonService: CommonService) {
 
     }
     ngOnInit() {
-        this.stores = Store.getAllStores(this.element.nativeElement, this.myParent, this.commonService);
-        this.stores.forEach(store => {
-            store.callService();
-        });
     }
 
     ngAfterViewInit() {
 
         let self = this;
+        this.stores = Store.getAllStores(this.element.nativeElement, this, this.commonService);
         if (this.comboBoxes) {
             this.comboBoxes.toArray().forEach(comp => {
                 Object.defineProperty(self, comp.props.ID.value, {
@@ -72,13 +86,15 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
             });
 
         });
+        this.stores.forEach(store => {
+            store.callService();
+        });
         this.getDefauldTextboxValue();
-
-        
+        this.getDefaultCheckBoxValue();
     }
 
     ngDoCheck() {
-          if (this.comboBoxes) {
+        if (this.comboBoxes) {
             this.stores.forEach(store => {
                 const combo = this.comboBoxes.toArray().filter(i => i.props.StoreID && i.props.StoreID.value == store.key)[0];
                 if (combo) {
@@ -98,31 +114,127 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
             this.isSaveCloseClick = false;
             return false;
         }
-        
-
-        // for (let i = 0; i < this.App.dsDepartments.allData.items.length; i++) {
-        //     if (this.App.dsDepartments.allData.items[i].data.DepartmentID !== this.App.dsDepartmentHeader.data.items[0].data.DepartmentID) {
-        //         if (this.App.dsDepartments.allData.items[i].data.DepartmentDescription.toLowerCase() ===
-        //             this.App.txtDepDesc.getValue().toLowerCase()) {
-        //             // showMessageInformation('Description already exists !');
-        //             this.isSaveCloseClick = false;
-        //             return false;
-        //         }
-        //     }
-        // }
 
         this.App.dsDepartmentHeader.data.items[0].data.DisplayPromptMethodID = this.App.cmbDisPromptMethod.getValue();
         this.App.dsDepartmentHeader.data.items[0].data.DepartmentTypeID = this.App.cmbDepTypesA.getValue();
-        this.App.DepartmentFormPanel.getForm().updateRecord(this.App.DepartmentFormPanel.record);
+        // need to understand
+        // this.App.DepartmentFormPanel.getForm().updateRecord(this.App.DepartmentFormPanel.record);
         this.App.dsDepartmentHeader.save();
         if (this.isSaveCloseClick === true) {
             // cancelDepartmentForm();
         }
-        //     else {
-        //     showMessageError('Fill the required field');
 
-        // }
     }
+
+    public getDepIDBySelectedIndex(object): number {
+
+        if (this.isNewDepartmentSource === false) {
+            // if (object != "deploc") {
+            if (this.isDepNext === false && this.isDepPrev === false) {
+                // get selected index of grid                 
+                if (this.App.grdDepartments.selModel.lastSelected != null) {
+                    this.selIndex = this.depRowindex;
+                }
+                if (this.App.dsDepartments.data.items.length > 0 && this.isSaveCloseClick === false) {
+                    if (this.App.dsDepartments.data.items[this.selIndex].data.DepartmentID !== 0) {
+                        this.depID = this.App.dsDepartments.data.items[this.selIndex].data.DepartmentID;
+                    }
+                }
+
+            } else if (this.isDepNext === true) {
+                // isDepNext = false;
+                this.depID = this.App.dsDepartments.data.items[this.selIndex].data.DepartmentID;
+            } else if (this.isDepPrev === true) {
+                // isDepPrev = false;
+                this.depID = this.App.dsDepartments.data.items[this.selIndex].data.DepartmentID;
+            }
+            this.App.lblCurrentRecord.setText(1 + this.selIndex + ' - ');
+            this.totalRecord = this.App.dsDepartments.getCount();
+            // need to conferm which relates to department.aspx page 
+            // this.App.lblTotalRecord.setText(this.totalRecord);
+        }
+        return this.depID;
+
+    }
+
+
+    // load the selected department record on department detail form
+    public departmentLoaded(store, records) {
+        this.isSaveCloseClick = false;
+        if (this.isNextorPrevClickdep === true) {
+            //  App.TabPanel1.setActiveTab(activetabdep);
+        }
+
+        if (records != null && records.length > 0) {
+            var recordToLoad = this.App.dsDepartmentHeader.data.items[0];
+
+            if (recordToLoad != null) {
+
+                // add case of department
+
+                if (records[0].data.DepartmentID === 0) {
+
+                    this.App.dsDepartmentHeader.data.items[0].newRecord = true;
+
+                    this.App.lblHeaderAdd.show();
+                    this.App.lblHeaderAdd.setText('Add a New Department');
+                    this.App.btnMoveDepartment.hide();
+                    document.getElementById("DepartmentTitle").style.display = "none";
+                    document.getElementById("prevNextDepDiv").style.display = "none";
+                    this.App.lnkPrevious.hide();
+                    this.App.lnkNext.hide();
+
+
+                } else {
+                    // edit case of department
+                    if (recordToLoad.data != null) {
+                        // this.App.lblHeader.setText(recordToLoad.data.DepartmentDescription);
+                    }
+
+                    // this.App.lblHeaderAdd.hide();
+                    // document.getElementById("DepartmentTitle").style.display = "block";
+                    // document.getElementById("prevNextDepDiv").style.display = "block";
+
+
+                    // this.App.lnkPrevious.show();
+                    // this.App.lnkNext.show();
+                    // recordToLoad.data.OldDepartmentDescription = recordToLoad.data.DepartmentDescription;
+                }
+
+
+                this.App.cmbDepTypesA.setValue(recordToLoad.data.DepartmentTypeID);
+                this.App.cmbDisPromptMethod.setValue(recordToLoad.data.DisplayPromptMethodID);
+                //App.txtDepProfitPercent.setValue(recordToLoad.data.ProfitPercent);
+
+                // this.App.DepartmentFormPanel.form.loadRecord(recordToLoad);
+                // this.App.DepartmentFormPanel.record = recordToLoad;
+                // this.App.cmbDepTypesA.setRawValue(recordToLoad.data.DepartmentTypeName);
+                // this.App.cmbDisPromptMethod.setRawValue(recordToLoad.data.DisplayPromptMethodDesc);
+
+                //  this.App.txtMinSaleAmount.setValue(this.App.txtMinSaleAmount.getRawValue());
+                //  this.App.txtMaxSaleAmount.setValue(this.App.txtMaxSaleAmount.getRawValue());
+
+                if (records[0].data.DepartmentID === 0) {
+                    this.App.chkIsDepartmentOpen.setValue(true);
+                    this.App.chkActiveFlag.setValue(true);
+                    this.App.chkIsDepartmentNegative.setVisible(false);
+                } else {
+                    this.App.chkActiveFlag.setValue(recordToLoad.data.ActiveFlag);
+                    this.App.chkIsDepartmentOpen.setValue(recordToLoad.data.IsDepartmentOpen);
+                    this.App.chkIsFractionalQtyAllowedFlag.setValue(recordToLoad.data.IsFractionalQtyAllowedFlag);
+                    this.App.chkIsLoyaltyRedeemEligibleFlag.setValue(recordToLoad.data.IsLoyaltyRedeemEligibleFlag);
+                    this.App.chkIsItemReturnableFlag.setValue(recordToLoad.data.IsItemReturnableFlag);
+                    this.App.chkAllowFoodStampsFlag.setValue(recordToLoad.data.AllowFoodStampsFlag);
+                }
+            }
+        } else {
+            // App.DepartmentFormPanel.form.reset();
+        }
+    };
+
+
+
+
 
     private getDefauldTextboxValue(): void {
         if (this.textBoxs) {
@@ -137,6 +249,21 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
             });
         }
     }
+    public getDefaultCheckBoxValue(): void {
+        if (this.checkBoxes) {
+            let self = this;
+            this.checkBoxes.toArray().forEach(comp => {
+                Object.defineProperty(self, comp.props.ID.value, {
+                    writable: true,
+                    enumerable: true,
+                    configurable: true,
+                    value: comp
+                });
+            });
+        }
+    }
+
+
 
     //   ngDoCheck() {
     // if (this.comboBoxes && this.check === 1) {
