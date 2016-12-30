@@ -210,12 +210,12 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
                 // App.txtDepProfitPercent.setValue(recordToLoad.data.ProfitPercent);
 
                 this.App.DepartmentFormPanel.loadRecord(recordToLoad);
-                // this.App.DepartmentFormPanel.record = recordToLoad;
+                // this.App.DepartmentFormPanel.record = recordToLoad; // need to undersatnd
                 // this.App.cmbDepTypesA.setRawValue(recordToLoad.data.DepartmentTypeName);
                 // this.App.cmbDisPromptMethod.setRawValue(recordToLoad.data.DisplayPromptMethodDesc);
 
-                //  this.App.txtMinSaleAmount.setValue(this.App.txtMinSaleAmount.getRawValue());
-                //  this.App.txtMaxSaleAmount.setValue(this.App.txtMaxSaleAmount.getRawValue());
+                this.App.txtMinSaleAmount.setValue(this.App.txtMinSaleAmount.getRawValue());
+                this.App.txtMaxSaleAmount.setValue(this.App.txtMaxSaleAmount.getRawValue());
 
                 if (records[0].data.DepartmentID === 0) {
                     this.App.chkIsDepartmentOpen.setValue(true);
@@ -234,11 +234,6 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
             // App.DepartmentFormPanel.form.reset();
         }
     };
-
-
-
-
-
     private getDefauldTextboxValue(): void {
         if (this.textBoxs) {
             let self = this;
@@ -267,7 +262,7 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
     }
 
     public getDefaultFormDetail(): void {
-           if (this.formPanels) {
+        if (this.formPanels) {
             let self = this;
             this.formPanels.toArray().forEach(comp => {
                 Object.defineProperty(self, comp.props.ID.value, {

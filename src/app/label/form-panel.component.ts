@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { FieldSetComponent } from '../label/field-set.component';
 import { ComboBoxComponent } from '../label/combobox.component';
+import { PanelComponent } from '../label/panel.component';
 export class ListItem {
   constructor(public label: string, public value: any) { }
 }
@@ -19,9 +20,9 @@ export class ListItem {
     </div>`
 })
 
-
 export class FormPanelComponent implements OnInit, AfterViewInit {
   @ContentChildren(FieldSetComponent) fieldSets: QueryList<FieldSetComponent>;
+  @ContentChildren(PanelComponent) panels: QueryList<PanelComponent>;
   @ContentChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
   public fieldSet: Array<any> = [];
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
@@ -30,12 +31,6 @@ export class FormPanelComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     console.log(this.element.nativeElement.innerHTML);
   }
-
-  ngDoCheck() {
-
-    //var a = this.fieldSets;
-  }
-
   public get action(): string {
     return '';
   }
@@ -51,46 +46,19 @@ export class FormPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    //console.log(this.comboBoxes);
-    // let self = this;
-    // if (this.comboBoxes) {
-    //     this.comboBoxes.toArray().forEach(comp => {
-    //         Object.defineProperty(self, comp.props.ID.value, {
-    //             writable: true,
-    //             enumerable: true,
-    //             configurable: true,
-    //             value: comp
-    //         });
-    //     });
-    // }
   }
 
   public loadRecord(records): void {
-
-    var a = this.fieldSets.toArray().forEach((comp) => {
-      comp.loadRecords(records);
-    });
-
-    // this.fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
-    // if (this.fieldSet) {
-    //   this.fieldSet.forEach((req) => {
-    //     this.fieldSets.loadRecords(records);
-    //   });
-    // }
+    if (this.fieldSets) {
+      this.fieldSets.toArray().forEach((field) => {
+        field.loadRecord(records);
+      });
+    }
+    if (this.panels) {
+      this.panels.toArray().forEach((panel) => {
+        panel.loadRecord(records);
+      });
+    }
   }
-  // switch (this.element.nativeElement) {
-  //   case this.element.nativeElement.querySelectorAll('FieldSet'):
-  //     let fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
-  //     if (fieldSet) {
-  //       fieldSet.map((req) => {
-  //         this.fieldSets.loadRecord(records);
-  //       });
-  //     }
-  //     break;
-  //   case this.element.nativeElement.querySelectorAll('Panel'):
-
-  //     break;
-  //   default:
-  // }
 }
 
