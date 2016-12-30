@@ -13,7 +13,8 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
   listenerElement: any;
   myParent: any;
   textBoxContent: string = '';
-  ID: any;
+  name: string;
+  ID: number;
   constructor(private element: ElementRef,
     private cd: ChangeDetectorRef,
     private vcRef: ViewContainerRef) {
@@ -21,6 +22,7 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
   }
   ngAfterViewInit() {
     this.listenerElement = this.element.nativeElement.querySelector('Listeners');
+      this.name = this.element.nativeElement.attributes.Name.value;
 
   }
   public get props(): any {
@@ -38,7 +40,7 @@ export class TextBoxComponent implements AfterViewInit, DoCheck {
     return this.textboxValue;
   }
 
-  public getRawValue(){
+  public getRawValue() {
      return this.textboxValue;
   }
 

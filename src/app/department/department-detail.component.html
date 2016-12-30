@@ -100,12 +100,12 @@
        <ext:FormPanel ID="DepartmentFormPanel" runat="server"  Padding="10" 
                 ButtonAlign="Right" Border="false" Width="1000" Height="300" Layout="ColumnLayout" IDMode="Static">
             <Items> 
-                <!--<ext:FieldSet LabelSeparator=" " ColumnWidth=".40" ID="rightDepPanel5" runat="server" Border="false" IDMode="Static">
+                <ext:FieldSet LabelSeparator=" " ColumnWidth=".40" ID="rightDepPanel5" runat="server" Border="false" IDMode="Static">
                     <Defaults>
                          <ext:Parameter Name="LabelWidth" Value="170" />
                          <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
                     </Defaults>
-                    <Items>-->
+                    <Items>
                         <ext:ComboBox Width="300" AllowBlank="false" ID="cmbDepTypesA" runat="server" FieldLabel="Department Type" 
                             Name="DepartmentTypeID" ValueField="StoreLocationID"  DisplayField="StoreName" 
                             StoreID="dsDepartmentTypes" IDMode="Static" QueryMode="Local" TypeAhead="true" >                            
@@ -132,9 +132,9 @@
                                 <Blur Fn="setDollorSignFoSaleAmt"></Blur>
                             </Listeners>
                         </ext:TextField>                                                                                       
-                    <!--</Items>-->
-                <!--</ext:FieldSet>            -->
-                <!--<ext:Panel LabelWidth="200" ColumnWidth=".40" ID="rightDepPanel" runat="server" Header="false" Border="false">
+                    </Items>
+                </ext:FieldSet>            
+                <ext:Panel LabelWidth="200" ColumnWidth=".40" ID="rightDepPanel" runat="server" Header="false" Border="false">
                     <Items>
                         <ext:Panel ColumnWidth=".20" ID="rightDepPanel1" runat="server" Title="Other Flags" Border="true" Height="270" BodyStyle="padding:5px 0 0 10px" >
                             <Items>
@@ -143,7 +143,7 @@
                                         <ext:Parameter Name="LabelWidth" Value="200"></ext:Parameter>
                                         <ext:Parameter Name="LabelSeparator" Value=" "></ext:Parameter>
                                     </Defaults>
-                                    <Items>                                -->
+                                    <Items>                                
                                         <ext:Checkbox ID="chkActiveFlag" runat ="server" FieldLabel="Active Department" IDMode="Static" Name="ActiveFlag"></ext:Checkbox>              
                                         <ext:Checkbox ID="chkIsDepartmentOpen" runat ="server" FieldLabel="Allow Open Sales In Department " IDMode="Static" Name="IsDepartmentOpen"></ext:Checkbox>  
                                         <ext:Checkbox ID="chkIsFractionalQtyAllowedFlag" runat ="server" FieldLabel="Allow Partial Quantity Sales" IDMode="Static" Name="IsFractionalQtyAllowedFlag"></ext:Checkbox>
@@ -155,15 +155,15 @@
                                         <ext:Checkbox ID="chkSalesRestrictionRequiredFlag" runat ="server" FieldLabel="SalesRestrictionRequiredFlag" IDMode="Static" Name="SalesRestrictionRequiredFlag" Hidden="true"></ext:Checkbox>
                                         <ext:Checkbox ID="chkIsDepartmentNegative" Disabled="true" runat ="server" FieldLabel="Department Negative" IDMode="Static" Name="IsDepartmentNegative"></ext:Checkbox>                                      
 
-                                    <!--</Items>
-                                </ext:FieldSet>-->
-                            <!--</Items>
+                                    </Items>
+                                </ext:FieldSet>
+                            </Items>
                         </ext:Panel>
                         <ext:Panel LabelWidth="200" ColumnWidth=".20" ID="rightDepPanel3" runat="server" Header="false" Border="false">
                             <Items></Items>
                         </ext:Panel>
-                    </Items>-->
-                <!--</ext:Panel>            -->
+                    </Items>
+               </ext:Panel>
         </Items>
     </ext:FormPanel>
     <div style="padding: 10px 0 10px 550px;">

@@ -10,6 +10,7 @@ import { TextBoxComponent } from '../label/textbox.component';
 import { CheckboxComponent } from '../label/checkbox.component';
 // import { DateFieldComponent } from './label/date-field.component';
 import { CommonService } from '../label/common.service';
+import { FormPanelComponent } from '../label/form-panel.component';
 // import { SelectItem } from 'primeng/primeng';
 // import { RadioComponent } from './label/radio.component';
 
@@ -23,6 +24,7 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
     //   @ViewChildren(DateFieldComponent) dateFields: QueryList<DateFieldComponent>;
     @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
     @ViewChildren(TextBoxComponent) textBoxs: QueryList<TextBoxComponent>;
+    @ViewChildren(FormPanelComponent) formPanels: QueryList<TextBoxComponent>;
 
     // cmbStoreLocation: ComboBoxComponent;
     //   title = 'app works!';
@@ -91,6 +93,7 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
         });
         this.getDefauldTextboxValue();
         this.getDefaultCheckBoxValue();
+        this.getDefaultFormDetail();
     }
 
     ngDoCheck() {
@@ -204,15 +207,15 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
 
                 this.App.cmbDepTypesA.setValue(recordToLoad.data.DepartmentTypeID);
                 this.App.cmbDisPromptMethod.setValue(recordToLoad.data.DisplayPromptMethodID);
-                //App.txtDepProfitPercent.setValue(recordToLoad.data.ProfitPercent);
+                // App.txtDepProfitPercent.setValue(recordToLoad.data.ProfitPercent);
 
-                // this.App.DepartmentFormPanel.form.loadRecord(recordToLoad);
-                // this.App.DepartmentFormPanel.record = recordToLoad;
+                this.App.DepartmentFormPanel.loadRecord(recordToLoad);
+                // this.App.DepartmentFormPanel.record = recordToLoad; // need to undersatnd
                 // this.App.cmbDepTypesA.setRawValue(recordToLoad.data.DepartmentTypeName);
                 // this.App.cmbDisPromptMethod.setRawValue(recordToLoad.data.DisplayPromptMethodDesc);
 
-                //  this.App.txtMinSaleAmount.setValue(this.App.txtMinSaleAmount.getRawValue());
-                //  this.App.txtMaxSaleAmount.setValue(this.App.txtMaxSaleAmount.getRawValue());
+                this.App.txtMinSaleAmount.setValue(this.App.txtMinSaleAmount.getRawValue());
+                this.App.txtMaxSaleAmount.setValue(this.App.txtMaxSaleAmount.getRawValue());
 
                 if (records[0].data.DepartmentID === 0) {
                     this.App.chkIsDepartmentOpen.setValue(true);
@@ -231,11 +234,6 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
             // App.DepartmentFormPanel.form.reset();
         }
     };
-
-
-
-
-
     private getDefauldTextboxValue(): void {
         if (this.textBoxs) {
             let self = this;
@@ -261,6 +259,21 @@ export class DepartmentDetailComponent implements DoCheck, OnInit, AfterViewInit
                 });
             });
         }
+    }
+
+    public getDefaultFormDetail(): void {
+        if (this.formPanels) {
+            let self = this;
+            this.formPanels.toArray().forEach(comp => {
+                Object.defineProperty(self, comp.props.ID.value, {
+                    writable: true,
+                    enumerable: true,
+                    configurable: true,
+                    value: comp
+                });
+            });
+        }
+
     }
 
 

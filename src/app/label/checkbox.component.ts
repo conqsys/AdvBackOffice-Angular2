@@ -5,7 +5,7 @@ import {
 import { ListenersComponent } from './listeners';
 @Component({
   selector: 'ext:Checkbox',
-  template: `<ng-content></ng-content> {{checkBoxlabel}}<input type="checkbox" 
+  template: `<ng-content></ng-content><label [disabled]="isDisabled"> {{checkBoxlabel}}</label><input type="checkbox" 
     [(ngModel)]="value" (click)="onChangeHandler($event)" [disabled]="isDisabled">`,
 })
 
@@ -18,7 +18,7 @@ export class CheckboxComponent implements AfterViewInit, DoCheck, OnChanges, OnI
   private ID: string = '';
   isChecked: boolean = false;
   checkBoxlabel: string;
-  isDisabled:boolean=false
+  isDisabled: boolean = false;
   constructor(private element: ElementRef,
     private cd: ChangeDetectorRef,
     private vcRef: ViewContainerRef) {
@@ -54,7 +54,7 @@ export class CheckboxComponent implements AfterViewInit, DoCheck, OnChanges, OnI
   }
 
   public setVisible(newValue: boolean){
-    this.isDisabled=newValue;
+    this.isDisabled = newValue;
   }
 
   ngOnChanges() {
