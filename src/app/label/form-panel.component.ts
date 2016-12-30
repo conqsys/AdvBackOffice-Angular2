@@ -1,8 +1,9 @@
 import {
   Component, ElementRef, OnInit,
-  ChangeDetectorRef, ContentChildren, QueryList, AfterViewInit
+  ChangeDetectorRef, ContentChildren, QueryList, AfterViewInit, DoCheck
 } from '@angular/core';
 import { FieldSetComponent } from '../label/field-set.component';
+import { ComboBoxComponent } from '../label/combobox.component';
 export class ListItem {
   constructor(public label: string, public value: any) { }
 }
@@ -20,8 +21,9 @@ export class ListItem {
 
 
 export class FormPanelComponent implements OnInit, AfterViewInit {
-  @ContentChildren(FieldSetComponent) fieldSets: FieldSetComponent;
-  public fieldSet: Array<any>= [];
+  @ContentChildren(FieldSetComponent) fieldSets: QueryList<FieldSetComponent>;
+  @ContentChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
+  public fieldSet: Array<any> = [];
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
   }
 
@@ -29,6 +31,10 @@ export class FormPanelComponent implements OnInit, AfterViewInit {
     console.log(this.element.nativeElement.innerHTML);
   }
 
+  ngDoCheck() {
+
+    //var a = this.fieldSets;
+  }
 
   public get action(): string {
     return '';
@@ -60,26 +66,31 @@ export class FormPanelComponent implements OnInit, AfterViewInit {
   }
 
   public loadRecord(records): void {
-       this.fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
-      if (this.fieldSet) {
-        this.fieldSet.forEach((req) => {
-          this.fieldSets.loadRecords(records);
-        });
-      }
-    }
-    // switch (this.element.nativeElement) {
-    //   case this.element.nativeElement.querySelectorAll('FieldSet'):
-    //     let fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
-    //     if (fieldSet) {
-    //       fieldSet.map((req) => {
-    //         this.fieldSets.loadRecord(records);
-    //       });
-    //     }
-    //     break;
-    //   case this.element.nativeElement.querySelectorAll('Panel'):
 
-    //     break;
-    //   default:
+    var a = this.fieldSets.toArray().forEach((comp) => {
+      comp.loadRecords(records);
+    });
+
+    // this.fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
+    // if (this.fieldSet) {
+    //   this.fieldSet.forEach((req) => {
+    //     this.fieldSets.loadRecords(records);
+    //   });
     // }
   }
+  // switch (this.element.nativeElement) {
+  //   case this.element.nativeElement.querySelectorAll('FieldSet'):
+  //     let fieldSet = this.element.nativeElement.querySelectorAll('FieldSet');
+  //     if (fieldSet) {
+  //       fieldSet.map((req) => {
+  //         this.fieldSets.loadRecord(records);
+  //       });
+  //     }
+  //     break;
+  //   case this.element.nativeElement.querySelectorAll('Panel'):
+
+  //     break;
+  //   default:
+  // }
+}
 

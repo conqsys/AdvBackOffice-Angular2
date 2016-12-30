@@ -1,7 +1,8 @@
 import {
   Component, ElementRef, OnInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,ContentChildren,QueryList
 } from '@angular/core';
+import { ComboBoxComponent } from '../label/combobox.component';
 export class ListItem {
   constructor(public label: string, public value: any) { }
 }
@@ -16,7 +17,7 @@ export class ListItem {
 
 
 export class FieldSetComponent implements OnInit {
-
+  @ContentChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
   constructor(private element: ElementRef, private cd: ChangeDetectorRef) {
   }
 
@@ -40,7 +41,9 @@ export class FieldSetComponent implements OnInit {
   }
 
   public loadRecords(records): any {
-    alert();
+    var a = this.comboBoxes.toArray().forEach((comp) => {
+      comp.getValue();
+    });
   }
 
 }
