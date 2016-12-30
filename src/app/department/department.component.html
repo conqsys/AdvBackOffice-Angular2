@@ -1,0 +1,36 @@
+
+<ext:Store ID="dsDepartmentTypes" runat="server" RemoteSort="true" AutoLoad="false" UseIdConfirmation="true">
+  <Proxy>
+    <ext:AjaxProxy Url="/DepartmentTypeData/GetDepartmentTypes" NoCache="false">
+      <Reader>
+        <ext:JsonReader IDProperty="DepartmentTypeID" Root="data" TotalProperty="total" />
+      </Reader>
+    </ext:AjaxProxy>
+  </Proxy>
+  <Model>
+    <ext:Model runat="server">
+      <Fields>
+        <ext:ModelField Name="DepartmentTypeID" SortDir="ASC" />
+        <ext:ModelField Name="DepartmentTypeName" />
+        <ext:ModelField Name="IsFractionalQtyAllowedFlag" Type="Boolean" />
+        <ext:ModelField Name="IsItemReturnableFlag" Type="Boolean" />
+        <ext:ModelField Name="AllowFoodStampsFlag" Type="Boolean" />
+        <ext:ModelField Name="SalesRestrictionRequiredFlag" Type="Boolean" />
+        <ext:ModelField Name="IsDepartmentNegative" Type="Boolean" />
+      </Fields>
+    </ext:Model>
+  </Model>
+
+  <Listeners>
+    <!--<Load Handler="App.dsDisPromptMethods.reload();" /> -->
+  </Listeners>
+</ext:Store>
+
+<ext:ComboBox runat="server" AllowBlank="false" ID="cmbStoreLocation" Width="100" TypeAhead="true" QueryMode="Local" StoreID="dsDepartmentTypes"
+  LabelSeparator=" " IDMode="Static" DisplayField="StoreName" Hidden="true" ValueField="StoreLocationID">
+  <Listeners>
+    <Select Handler="App.dsStoreLocTaxes.reload();App.dsSalesRestrictions.reload();App.cmbSalesRestrication.setValue(0);App.cmbSalesRestrication.setRawValue('NONE');App.cmbTax.setRawValue('NONE');App.cmbTax.setValue(0)"
+    />
+  </Listeners>
+</ext:ComboBox>
+
