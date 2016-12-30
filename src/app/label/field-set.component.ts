@@ -11,9 +11,7 @@ export class ListItem {
   template: `
     <h3>FieldSet</h3>
     <ng-content></ng-content>
-      <div>
-      
-    </div>`
+    `
 })
 
 
