@@ -60,11 +60,12 @@ export class ComboBoxComponent implements OnInit {
 
   public set store(newValue: Store) {
     this._store = newValue;
-    this.items = [];
+    if (this.items.length === 0)  {
     this._store.data.items.forEach(item => {
       this.items.push(new ListItem(item[this.props.DisplayField.value], item));
     });
   }
+}
 
   public get props(): any {
     return this.element.nativeElement.attributes;

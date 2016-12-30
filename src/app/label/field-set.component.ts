@@ -8,7 +8,6 @@ export class ListItem {
 
 @Component({
   selector: 'ext:FieldSet',
-
   template: `
     <h3>FieldSet</h3>
     <ng-content></ng-content>
@@ -40,6 +39,10 @@ export class FieldSetComponent implements OnInit {
 
   public get props(): any {
     return this.element.nativeElement.attributes;
+  }
+
+  public loadRecords(records): any {
+    alert();
   }
 
 }
