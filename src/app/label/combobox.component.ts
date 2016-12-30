@@ -57,6 +57,9 @@ export class ComboBoxComponent implements OnInit {
   public setValue(newValue: string) {
     this.selectedValue = newValue;
   }
+   public getValue() {
+    return this.selectedValue;
+  }
 
   public set store(newValue: Store) {
     this._store = newValue;
@@ -70,6 +73,7 @@ export class ComboBoxComponent implements OnInit {
   public get props(): any {
     return this.element.nativeElement.attributes;
   }
+
 
   private addOptions() {
     let listItems = this.element.nativeElement.querySelectorAll('ListItem');
