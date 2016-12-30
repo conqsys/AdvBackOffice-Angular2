@@ -1,0 +1,208 @@
+<div>
+  <ext:Store ID="dsCountries" runat="server" IDMode="Static">
+    <Proxy>
+      <ext:AjaxProxy Url="/CountryData/GetCounties" NoCache="false">
+        <Reader>
+          <ext:JsonReader IDProperty="CountyCode" Root="data" TotalProperty="total">
+          </ext:JsonReader>
+        </Reader>
+      </ext:AjaxProxy>
+    </Proxy>
+    <Model>
+      <ext:Model runat="server">
+        <Fields>
+          <ext:ModelField Name="CountyCode" SortDir="ASC" />
+          <ext:ModelField Name="StateCode" />
+          <ext:ModelField Name="CountyName" />
+        </Fields>
+      </ext:Model>
+    </Model>
+  </ext:Store>
+
+  <ext:Store runat="server" ID="dsCompanyDetail" IDMode="Static">
+    <Proxy>
+      <ext:AjaxProxy Url="/TestCompanyData/GetCompanyByID">
+        <Reader>
+          <ext:JsonReader Root="data" TotalProperty="total" IDProperty="CompanyID" />
+        </Reader>
+        <Writer>
+          <ext:JsonWriter Root="data" Encode="true" />
+        </Writer>
+      </ext:AjaxProxy>
+    </Proxy>
+    <SyncParameters>
+      <ext:StoreParameter Name="action" Value="operation.action" Mode="Raw" />
+    </SyncParameters>
+    <Model>
+      <ext:Model runat="server">
+        <Fields>
+          <ext:ModelField Name="CompanyID" Type="Int"></ext:ModelField>
+          <ext:ModelField Name="EnableMobileLogging" Type="Boolean"></ext:ModelField>
+          <ext:ModelField Name="IsActive" Type="Boolean"></ext:ModelField>
+          <ext:ModelField Name="IsJobber" Type="Boolean"></ext:ModelField>
+          <ext:ModelField Name="CompanyTaxID"></ext:ModelField>
+          <ext:ModelField Name="CompanyName"></ext:ModelField>
+          <ext:ModelField Name="CompanyLoginCode"></ext:ModelField>
+          <ext:ModelField Name="City"></ext:ModelField>
+          <ext:ModelField Name="CompanyAddressLine1"></ext:ModelField>
+          <ext:ModelField Name="CompanyAddressLine2"></ext:ModelField>
+          <ext:ModelField Name="StateCode"></ext:ModelField>
+          <ext:ModelField Name="StateName"></ext:ModelField>
+          <ext:ModelField Name="CountyName"></ext:ModelField>
+          <ext:ModelField Name="PhoneNo"></ext:ModelField>
+          <ext:ModelField Name="E_Mail"></ext:ModelField>
+          <ext:ModelField Name="ZIPCode"></ext:ModelField>
+          <ext:ModelField Name="Fax"></ext:ModelField>
+          <ext:ModelField Name="CountyCode"></ext:ModelField>
+          <ext:ModelField Name="IsInPOSSyncStatus" Type="Boolean"></ext:ModelField>
+          <ext:ModelField Name="SyncUser"></ext:ModelField>
+          <ext:ModelField Name="SyncPwd"></ext:ModelField>
+          <ext:ModelField Name="editlnk"></ext:ModelField>
+          <ext:ModelField Name="deletelnk"></ext:ModelField>
+        </Fields>
+      </ext:Model>
+    </Model>
+    <Parameters>
+      <!--<ext:StoreParameter Name="companyID" Value="getCompanyID()" Mode="Raw"></ext:StoreParameter>-->
+    </Parameters>
+    <Listeners>
+      <Load fn="companyDetailLoaded" />
+      <Write fn="companySaveDone" />
+    </Listeners>
+  </ext:Store>
+
+  <ext:Store ID="dsStates" runat="server">
+    <Proxy>
+      <ext:AjaxProxy Url="/StateData/GetStates" NoCache="false">
+        <Reader>
+          <ext:JsonReader IDProperty="StateCode" Root="data" TotalProperty="total" />
+        </Reader>
+        <Writer>
+          <ext:JsonWriter Encode="true" Root="data" />
+        </Writer>
+      </ext:AjaxProxy>
+    </Proxy>
+    <Model>
+      <ext:Model runat="server">
+        <Fields>
+          <ext:ModelField Name="StateCode" SortDir="ASC" />
+          <ext:ModelField Name="StateName" />
+        </Fields>
+      </ext:Model>
+    </Model>
+  </ext:Store>
+
+
+  <div id="storeFrmPanel" style="clear: both">
+
+    <ext:FormPanel LabelWidth="160" runat="server" ID="CompanyFormPanel" Border="false" IDMode="Static" ClientIDMode="Static"
+      Padding="10" Width="1000" Layout="ColumnLayout" Height="380">
+      <Items>
+        <ext:FieldSet ID="companyPanel1" runat="server" IDMode="Static" Layout="Form" Border="false">
+          <Defaults>
+            <ext:Parameter Name="LabelSeparator" Value=" " />
+            <ext:Parameter Name="LabelWidth" Value="160" />
+            <ext:Parameter Name="Width" Value="360" />
+          </Defaults>
+          <Items>
+
+            <ext:TextField ID="txtCompanyLoginCode" AllowBlank="false" runat="server" IDMode="Static" Name="CompanyLoginCode" FieldLabel="Company Login Code">
+            </ext:TextField>
+
+            <ext:TextField ID="txtCompanyTaxID" runat="server" IDMode="Static" Name="CompanyTaxID" FieldLabel="Company TaxID"></ext:TextField>
+
+            <ext:TextField ID="txtCompanyName" runat="server" IDMode="Static" Name="CompanyName" AllowBlank="false" FieldLabel="Company Name"></ext:TextField>
+            <ext:TextField ID="txtCompanyAddressLine1" runat="server" IDMode="Static" Name="CompanyAddressLine1" FieldLabel="Company Address Line1"></ext:TextField>
+            <ext:TextField ID="txtCompanyAddressLine2" runat="server" IDMode="Static" Name="CompanyAddressLine2" FieldLabel="Company Address Line2"></ext:TextField>
+
+            <ext:TextField ID="txtComCity" runat="server" IDMode="Static" Name="City" FieldLabel="City"></ext:TextField>
+
+            <ext:ComboBox AllowBlank="false" ID="cmbCountries" runat="server" FieldLabel="County" Name="CountyCode" ValueField="CountyCode"
+              TypeAhead="true" QueryMode="Local" DisplayField="CountyName" StoreID="dsCountries" IDMode="Static">
+            </ext:ComboBox>
+
+            <ext:ComboBox AllowBlank="false" ID="cmbStates" runat="server" FieldLabel="State" Name="StateCode" ValueField="StateCode"
+              DisplayField="StateCode" QueryMode="Local" StoreID="dsStates" IDMode="Static" TypeAhead="true">
+            </ext:ComboBox>
+            <ext:TextField ID="txtzipcode" runat="server" IDMode="Static" Name="ZIPCode" FieldLabel="ZIP Code" MaxLength="5">
+            </ext:TextField>
+            <ext:TextField ID="txtE_Mail" runat="server" IDMode="Static" Name="E_Mail" AllowBlank="false" FieldLabel="Email">
+              <Listeners>
+                <Blur Fn="CheckValidEMail" />
+              </Listeners>
+            </ext:TextField>
+
+            <ext:TextField ID="txtComPhoneNo" AllowBlank="false" runat="server" IDMode="Static" Name="PhoneNo" FieldLabel="PhoneNo"></ext:TextField>
+            <ext:TextField ID="txtFax" runat="server" IDMode="Static" Name="Fax" FieldLabel="Fax"></ext:TextField>
+            <ext:TextField AllowBlank="false" ID="txtSyncUser" runat="server" IDMode="Static" Name="SyncUser" FieldLabel="SyncUser"></ext:TextField>
+            <ext:TextField AllowBlank="false" ID="txtSyncPwd" runat="server" IDMode="Static" Name="SyncPwd" FieldLabel="SyncPwd"></ext:TextField>
+           
+          </Items>
+        </ext:FieldSet>
+
+      </Items>
+    </ext:FormPanel>
+    <div style="padding: 0px 0 0px 20px; width: 400px; float: left">
+      <div style="width: 200px; float: left">
+        <label style="font:  tahoma,arial,verdana,sans-serif;">Enable Mobile Logging</label>
+
+      </div>
+      <div style="width: 25px; float: left;">
+        <input id="chkEnableMobLogging" class="text" type="checkbox" name="EnableMobileLogging" value="EnableMobileLogging" style="width: 25px"
+        />
+      </div>
+    </div>
+    <div style="padding: 5px 0 0px 20px; width: 400px; float: left;clear:both;">
+      <div style="width: 200px; float: left">
+        <label style="font:  tahoma,arial,verdana,sans-serif;">See Data in POS Sync Status</label>
+
+      </div>
+      <div style="width: 25px; float: left;">
+        <input id="chkIsInPosSyncStatus" class="text" type="checkbox" name="IsInPOSSyncStatus" value="IsInPOSSyncStatus" style="width: 25px"
+        />
+      </div>
+    </div>
+    <div style="padding: 5px 0 0px 20px; width: 400px; float: left;clear:both;">
+      <div style="width: 200px; float: left">
+        <label style="font: tahoma,arial,verdana,sans-serif;">Enable IsJobber</label>
+
+      </div>
+      <div style="width: 25px; float: left;">
+        <input id="chkIsJobber" class="text" type="checkbox" name="IsJobber" value="IsJobber" style="width: 25px" />
+      </div>
+    </div>
+    <div style="padding: 5px 0 0px 20px; width: 400px; float: left;clear:both;">
+      <div style="width: 200px; float: left">
+        <label style="font:  tahoma,arial,verdana,sans-serif;">IsActive</label>
+
+      </div>
+      <div style="width: 25px; float: left;">
+        <input id="chkIsActive" class="text" type="checkbox" name="IsActive" value="IsActive" style="width: 25px" />
+      </div>
+    </div>
+    <div style="padding: 10px 0 0 225px; clear:both;">
+      <div style="float: left; width: 100px; margin-bottom: 10px">
+        <ext:Button runat="server" Text="Save" Width="90" Height="25" IDMode="Static">
+          <Listeners>
+            <Click Fn="saveCompanyForm" />
+          </Listeners>
+        </ext:Button>
+      </div>
+      <div style="float: left; width: 100px; margin-bottom: 10px">
+        <ext:Button ID="btnSaveCloseCompanyfrm" runat="server" Width="90" Hidden="false" IDMode="Static" Text="Save & Close" Height="25">
+          <Listeners>
+            <Click Fn="saveCloseCompanyForm" />
+          </Listeners>
+        </ext:Button>
+      </div>
+      <div style="float: left; width: 100px; margin-bottom: 10px">
+        <ext:Button ID="btnCancelCompanyfrm" runat="server" Width="90" Hidden="false" IDMode="Static" Text="Cancel" Height="25">
+          <Listeners>
+            <Click Fn="cancelAllCompanyChanges" />
+          </Listeners>
+        </ext:Button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -28,7 +28,7 @@ import { PanelComponent } from './label/panel.component';
 import { ComboBoxComponent } from './label/combobox.component';
 import { DateFieldComponent } from './label/date-field.component';
 import { LinkButtonComponent } from './label/linkButton.component';
-import {TextAreaComponent} from './label/textarea.component'
+import { TextAreaComponent } from './label/textarea.component'
 import { RadioComponent } from './label/radio.component';
 import { CommonService } from './label/common.service';
 import { Store } from './label/store.component';
@@ -49,7 +49,8 @@ import {
   FileUploadModule
 } from 'primeng/primeng';
 
-import {DepartmentDetailComponent} from './department/department-detail.component'
+import { DepartmentDetailComponent } from './department/department-detail.component';
+import { CompanyDetailComponent } from './company/company-detail.component';
 /* sky-app components end */
 
 @NgModule({
@@ -95,7 +96,8 @@ import {DepartmentDetailComponent} from './department/department-detail.componen
     ListenersComponent,
     ClickEvent,
     TextAreaComponent,
-    DepartmentDetailComponent
+    DepartmentDetailComponent,
+    CompanyDetailComponent
   ],
   providers: [ExtEvent, ExtBaseComponent, CommonService, Store],
   bootstrap: [AppComponent],
