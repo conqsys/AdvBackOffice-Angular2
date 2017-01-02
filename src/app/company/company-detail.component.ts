@@ -10,6 +10,7 @@ import { CommonService } from '../label/common.service';
 import { ComboBoxComponent } from '../label/combobox.component';
 import { TextBoxComponent } from '../label/textbox.component';
 import { CheckboxComponent } from '../label/checkbox.component';
+import { FormPanelComponent } from '../label/form-panel.component';
 
 @Component({
   selector: 'company-detail',
@@ -20,6 +21,7 @@ export class CompanyDetailComponent implements AfterViewInit, DoCheck {
   @ViewChildren(ComboBoxComponent) comboBoxes: QueryList<ComboBoxComponent>;
   @ViewChildren(CheckboxComponent) checkBoxes: QueryList<CheckboxComponent>;
   @ViewChildren(TextBoxComponent) textBoxs: QueryList<TextBoxComponent>;
+  @ViewChildren(FormPanelComponent) formPanels: QueryList<TextBoxComponent>;
 
   stores = Store[0];
   App: any = this;
@@ -108,6 +110,21 @@ export class CompanyDetailComponent implements AfterViewInit, DoCheck {
         });
       });
     }
+    this.getDefaultFormDetail();
+  }
+
+  public getDefaultFormDetail(): void {
+    if (this.formPanels) {
+      let self = this;
+      this.formPanels.toArray().forEach(comp => {
+        Object.defineProperty(self, comp.props.ID.value, {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: comp
+        });
+      });
+    }
   }
 
   private companyDetailLoaded(store, records) {
@@ -172,7 +189,7 @@ export class CompanyDetailComponent implements AfterViewInit, DoCheck {
         // chkIsJobber.checked = recordToLoad.data.IsJobber;
         // chkIsActive.checked = recordToLoad.data.IsActive;
 
-        // this.App.CompanyFormPanel.form.loadRecord(recordToLoad);
+        this.App.CompanyFormPanel.loadRecord( this.App.dsCompanyDetail.data.items[0]);
         // this.App.CompanyFormPanel.record = recordToLoad;
       }
     } else {
