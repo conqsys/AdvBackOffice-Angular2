@@ -36,7 +36,7 @@ export class DepartmentComponent implements DoCheck, OnInit, AfterViewInit {
   @ViewChildren(TextAreaComponent) textareas: QueryList<TextAreaComponent>;
 
 
- title = 'AdvBack Office Development';
+  title = 'AdvBack Office Development';
 
   app: AppController;
   stores = Store[0];
@@ -81,7 +81,7 @@ export class DepartmentComponent implements DoCheck, OnInit, AfterViewInit {
           configurable: true,
           value: comp
         });
-        console.log('datda is' + this.App.dpPurchaseRepStartDate);
+        console.log('data is' + this.App.dpPurchaseRepStartDate);
       });
     }
 
@@ -282,15 +282,11 @@ export class DepartmentComponent implements DoCheck, OnInit, AfterViewInit {
   }
 
   setCheckBoxValue() {
-
     this.App.chkShowLocation1.setValue(true);
-
-    
   }
 
-
-  setVisible(){
-    this.App.chkShowLocation4.setVisible(true)
+  setVisible() {
+    this.App.chkShowLocation4.setVisible(true);
   }
 
   checkBoxClick() {
@@ -305,5 +301,4 @@ export class DepartmentComponent implements DoCheck, OnInit, AfterViewInit {
   setFocusToBuyingCost() {
     alert('textarea');
   }
-
 }

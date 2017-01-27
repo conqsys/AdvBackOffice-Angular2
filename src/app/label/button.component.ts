@@ -1,10 +1,18 @@
-import { ContentChild, DoCheck, ViewContainerRef, Component, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import {
+  ContentChild, DoCheck,
+  ViewContainerRef, Component,
+  ElementRef, ChangeDetectorRef,
+  AfterViewInit
+} from '@angular/core';
+
 import { ListenersComponent } from './listeners';
+
 @Component({
   selector: 'ext:Button',
   template: `<ng-content></ng-content>
-             <button (click)="onClickHandler($event)" pTooltip={{tooltipMsg}} >{{props.Text.value}}test</button>`,
+             <button pButton (click)="onClickHandler($event)" label=" ">{{props.Text.value}}</button>`,
 })
+
 export class ButtonComponent implements AfterViewInit, DoCheck {
 
   @ContentChild(ListenersComponent) listeners: ListenersComponent;
@@ -42,18 +50,17 @@ export class ButtonComponent implements AfterViewInit, DoCheck {
       this.listeners.clickEvent.getUrlParameterString(this.myParent);
     console.log(callToService);
   }
+
   ngDoCheck() {
     console.log(this.listeners);
   }
 
   ngAfterViewInit() {
-    
-        this.tooltips = this.element.nativeElement.querySelector('ToolTips');
+    this.tooltips = this.element.nativeElement.querySelector('ToolTips');
     if (this.tooltips) {
       this.tooltipListner = this.tooltips.querySelector('ToolTip');
       if (this.tooltipListner) {
         this.tooltipMsg = this.tooltipListner.attributes.Html.value;
-        
       }
     }
   }

@@ -1,0 +1,47 @@
+<div class="ui-g">
+  <div class="ui-g-6">Col1</div>
+  <div class="ui-g-6">Col2</div>
+</div>
+
+<div class="ui-g-12">
+  <p-dataGrid [value]="cars" [paginator]="true" [rows]="10" [lazy]="false" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords">
+    <header>
+      List of Cars
+    </header>
+    <template let-car>
+      <div style="padding:3px" class="ui-g-12 ui-md-3">
+        <p-panel [header]="car.vin" [paginator]="true" [style]="{'text-align':'center'}">
+          <img src="../../assets/car/{{car.brand}}.gif">
+          <div class="car-detail">{{car.year}} - {{car.color}}</div>
+          <hr class="ui-widget-content" style="border-top:0">
+          <i class="fa fa-search" (click)="selectCar(car)" style="cursor:pointer"></i>
+        </p-panel>
+      </div>
+    </template>
+  </p-dataGrid>
+
+  <p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="225"
+    (onAfterHide)="onDialogHide()">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="selectedCar" style="font-size:16px;text-align:center;padding:20px">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12" style="text-align:center"><img src="../../assets/car/{{selectedCar.brand}}-big.gif"></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">Vin: </div>
+        <div class="ui-grid-col-8">{{selectedCar.vin}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">Year: </div>
+        <div class="ui-grid-col-8">{{selectedCar.year}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">Brand: </div>
+        <div class="ui-grid-col-8">{{selectedCar.brand}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">Color: </div>
+        <div class="ui-grid-col-8">{{selectedCar.color}}</div>
+      </div>
+    </div>
+  </p-dialog>
+</div>
